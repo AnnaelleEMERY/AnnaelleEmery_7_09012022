@@ -25,7 +25,7 @@ const routes = [
     {
       path: '/menbre',
       name: 'menbre',
-      component: () => import('../views/menbers.vue')
+      component: () => import('../views/members.vue')
     }
 ]
 

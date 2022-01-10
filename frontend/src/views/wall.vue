@@ -84,6 +84,7 @@ main {
   padding: 1rem;
   background-color: rgb(218, 212, 212);
   margin-top: 2rem;
+  border-radius: 5px;
 }
 
 h1 {

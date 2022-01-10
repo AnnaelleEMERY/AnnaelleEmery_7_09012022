@@ -32,16 +32,12 @@
       </div>
     </div>
 
-    <div class="card row-8 p-3 border-blue mt-3">
-      <div id="card">
-        <Post
-          v-for="post in posts"
-          v-bind:key="post.id"
-          :post="post"
-          @deletePostEvent="deletePost"
-        />
-      </div>
-    </div>
+    <Post
+      v-for="post in posts"
+      v-bind:key="post.id"
+      :post="post"
+      @deletePostEvent="deletePost"
+    />
   </div>
 </template>
 
@@ -151,6 +147,14 @@ body {
   background-color: rgb(218, 214, 210);
 }
 
+main {
+  border: 2px solid #d1515a;
+  padding: 1rem;
+  background-color: rgb(218, 212, 212);
+  margin-top: 2rem;
+  border-radius: 5px;
+}
+
 .container {
   font-family: "Comic Sans MS", cursive;
 }
@@ -163,12 +167,7 @@ h1 {
 .div-post-creation {
   padding: 1.5rem;
   border: 2px solid rgb(40, 40, 144);
-  border-radius: 10px;
-}
-
-.card {
-  border: 2px solid #d1515a;
-  background-color: rgb(218, 212, 212);
+  border-radius: 5px;
 }
 
 .form {
