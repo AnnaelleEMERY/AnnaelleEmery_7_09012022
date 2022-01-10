@@ -43,9 +43,9 @@
             class="form-control"
             v-if="mode == 'create'"
             id="floatingName"
-            placeholder="Nom"
+            placeholder="Prénom"
           />
-          <label for="floatingName">Nom</label>
+          <label for="floatingName">Prénom</label>
         </div>
 
         <div class="form-floating justify-content-center">
@@ -55,9 +55,9 @@
             class="form-control"
             v-if="mode == 'create'"
             id="floatingLastname"
-            placeholder="Prénom"
+            placeholder="Nom"
           />
-          <label for="floatingPassword">Prénom</label>
+          <label for="floatingPassword">Nom</label>
         </div>
 
         <div class="form-floating mb-3 justify-content-center">
@@ -115,7 +115,7 @@ export default {
       email: "",
       password: "",
       message: "",
-      emessage:"",
+      emessage: "",
     };
   },
   methods: {
@@ -125,7 +125,7 @@ export default {
     switchToLogin: function () {
       this.mode = "login";
     },
-    userLogin () {
+    userLogin() {
       if (this.email == "" || this.password == "") {
         alert(
           "Veuillez entrer votre email et votre mot de passe pour vous connecter"
@@ -180,8 +180,8 @@ export default {
           })
           .catch(() => {
             {
-              this.emessage =`"Votre mot de passe doit contenir min 8 caractères"
-                              "1 maj et 2 chiffres"` ;
+              this.emessage = `"Votre mot de passe doit contenir min 8 caractères"
+                              "1 maj et 2 chiffres"`;
             }
           });
       }
@@ -192,54 +192,63 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-#app{
-  background-color:  none !important  ;
+#app {
+  background-color: none !important  ;
 }
 
-.container{
-  DISPLAY: FLEX;
-    FLEX-DIRECTION: COLUMN;
-    JUSTIFY-CONTENT: CENTER;
-    ALIGN-CONTENT: CENTER;
-    ALIGN-ITEMS: CENTER;
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
 }
+
 h1 {
   font-size: larger;
   margin-top: 10px;
-  color: red
+  color: #d1515a;
 }
+
 .form-floating {
   width: 300px;
 }
+
 .btn {
   margin-top: 10px;
 }
+
 img {
   width: 300px;
+  box-shadow: 0px 0px 15px 15px white;
 }
+
 .connect {
   display: flex;
   justify-content: center;
 }
+
 .card__subtitle {
   display: flex;
   justify-content: center;
   cursor: pointer;
   margin-left: 10px;
   margin-right: 10px;
-  
 }
+
 fieldset {
   margin-bottom: 100px;
-  DISPLAY: FLEX;
-  FLEX-DIRECTION: COLUMN;
-  border-radius: 50PX;
-  BACKGROUND-COLOR: blanchedalmond;
-  box-shadow: 2px 3px 3px red;
+  display: FLEX;
+  flex-direction: COLUMN;
+  border-radius: 50px;
+  background-color: blanchedalmond;
+  box-shadow: 2px 3px 3px #d1515a;
 }
+
 .form-control {
   margin-top: 10px;
 }
+
 .mgs {
   display: flex;
   justify-content: center;

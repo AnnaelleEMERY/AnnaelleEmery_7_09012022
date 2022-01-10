@@ -1,12 +1,14 @@
 <template>
-  <router-view />
+  <router-view/>
 </template>
 
-
-
 <style>
-html, body, #app {
+html, body {
   width: 100%;
   height: 100%;
+}
+
+.container:last-child {
+  padding-bottom: 5rem;
 }
 </style>

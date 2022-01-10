@@ -35,7 +35,7 @@
         <div class="d-flex flex-column">
           <div class="d-flex flex-column">
             <h6 class="mb-0">
-              {{ comment.user.firstName }} {{ comment.user.lastName }}
+              {{ comment.user.lastName }} {{ comment.user.firstName }}
             </h6>
             <span class="date">{{ formatDate(comment.createdAt) }}</span>
           </div>
@@ -43,7 +43,7 @@
         <div class="com d-flex justify-content-between">
           <p class="content">{{ comment.comment }}</p>
           <button
-            class="btn btn-outline-secondary btn-sm"
+            class="btn btn-outline-secondary btn-sm btn-trash"
             v-if="comment.userId === user.id || user.admin === true"
             @click.prevent="deleteCom(comment)"
           >
@@ -86,9 +86,8 @@ export default {
       lastName: "",
       title: "",
       message: "",
-      content:'',
-      posts:[],
-      
+      content: "",
+      posts: [],
     };
   },
   props: {
@@ -194,38 +193,58 @@ export default {
         })
         .catch((err) => console.log(err));
     },
-    
   },
 };
 </script>
 
 <style scoped>
-
 h1 {
   font-family: "Comic Sans MS", cursive;
-  color: red;
+  color: #d1515a;
 }
+
 h2 {
   font-size: smaller;
 }
+
+.date {
+  font-size: 0.9rem;
+}
+
 .card {
-  border: 1px solid red;
-  box-shadow: 2px 3px 3px red;
+  border: 2px solid #d1515a;
   background-color: antiquewhite;
 }
+
 .form {
   margin-top: 30px;
 }
-.trash {
-  color: red;
+
+.btn-trash {
+  border: 1px solid #d1515a;
 }
+
+.btn-trash:hover {
+  background-color: #d1515a;
+}
+
+.trash {
+  color: #d1515a;
+}
+
+.btn-trash:hover span {
+  color: #5e0404;
+}
+
 .titleCon {
   margin-top: 20px;
 }
+
 .title {
   font-weight: bolder;
 }
+
 .mgs {
-  color: red;
+  color: #d1515a;
 }
 </style>

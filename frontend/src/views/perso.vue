@@ -2,15 +2,15 @@
   <navBar />
   <div class="container">
     <div class="container pb-cmnt-container">
-      <h1>Bienvenue sur ton espace {{ user.firstName }} {{ user.lastName }}</h1>
-      <div class="row">
+      <h1>Bienvenue sur ta page {{ user.firstName }} {{ user.lastName }}</h1>
+      <div class="row div-post-creation">
         <div class="col-md-9 col-md-offset-3">
           <div class="panel panel-info">
             <div class="panel-body">
               <div class="form-group green-border-focus">
                 <label for="title">Sujet</label><br />
                 <input type="text" v-model="title" class="form-control" /><br />
-                <label for="postMsg">Exprimez vous</label>
+                <label for="postMsg">Exprimez-vous</label>
                 <textarea
                   v-model="content"
                   class="form-control"
@@ -20,7 +20,7 @@
                 <div class="mgs">{{ message }}</div>
               </div>
               <button
-                class="btn btn-primary pull-right"
+                class="btn btn-primary pull-right btn-post-partager"
                 type="text"
                 @click="postMessage()"
               >
@@ -34,7 +34,12 @@
 
     <div class="card row-8 p-3 border-blue mt-3">
       <div id="card">
-        <Post v-for="post in posts" v-bind:key="post.id" :post="post" @deletePostEvent="deletePost"/>
+        <Post
+          v-for="post in posts"
+          v-bind:key="post.id"
+          :post="post"
+          @deletePostEvent="deletePost"
+        />
       </div>
     </div>
   </div>
@@ -75,7 +80,6 @@ export default {
       .then((response) => (this.user = response.data))
       .catch((err) => console.log(err));
 
-    
     axios
       .get("http://localhost:3000/api/auth/posts/" + userId, {
         headers: {
@@ -91,42 +95,42 @@ export default {
 
   methods: {
     postMessage() {
-    if (this.content==''|| this.title=='') {
-        (this.message="Veuillez inscrire un sujet et un message")
-    }else{
-      axios
-        .post(
-          "http://localhost:3000/api/auth/posts/post",
-          { content: this.content, title: this.title },
-          {
-            headers: {
-              Authorization: "Bearer " + sessionStorage.token,
-            },
-          }
-        )
-        .then((response) => {
-          console.log(response);
-          this.content = "";
-          this.title = "";
-          const userId = sessionStorage.getItem("user");
-          axios
-            .get("http://localhost:3000/api/auth/posts/" + userId, {
+      if (this.content == "" || this.title == "") {
+        this.message = "Veuillez inscrire un sujet et un message";
+      } else {
+        axios
+          .post(
+            "http://localhost:3000/api/auth/posts/post",
+            { content: this.content, title: this.title },
+            {
               headers: {
                 Authorization: "Bearer " + sessionStorage.token,
               },
-            })
-            .then((response) => {
-              console.log(response);
-              this.posts = response.data;
-              this.message = "";
-            })
-            .catch((err) => console.log(err));
-        });
-    }
+            }
+          )
+          .then((response) => {
+            console.log(response);
+            this.content = "";
+            this.title = "";
+            const userId = sessionStorage.getItem("user");
+            axios
+              .get("http://localhost:3000/api/auth/posts/" + userId, {
+                headers: {
+                  Authorization: "Bearer " + sessionStorage.token,
+                },
+              })
+              .then((response) => {
+                console.log(response);
+                this.posts = response.data;
+                this.message = "";
+              })
+              .catch((err) => console.log(err));
+          });
+      }
     },
     deletePost(item) {
       axios
-        .delete("http://localhost:3000/api/auth/posts/" +item.id, {
+        .delete("http://localhost:3000/api/auth/posts/" + item.id, {
           headers: {
             Authorization: "Bearer " + sessionStorage.getItem("token"),
           },
@@ -134,36 +138,39 @@ export default {
         .then((response) => {
           console.log(response);
           this.posts = this.posts.filter((post) => post.id != item.id);
-          
         })
         .catch((err) => console.log(err));
     },
   },
 };
 </script>
-<style>
-#app{
-  background-color: #d1d1eb;
-}
-</style>
 
 
 <style scoped>
-body{
-   BACKGROUND-COLOR: rgb(218, 214, 210);
+body {
+  background-color: rgb(218, 214, 210);
 }
+
 .container {
   font-family: "Comic Sans MS", cursive;
 }
+
 h1 {
   font-family: "Comic Sans MS", cursive;
-  color: red;
+  color: #d1515a;
 }
+
+.div-post-creation {
+  padding: 1.5rem;
+  border: 2px solid rgb(40, 40, 144);
+  border-radius: 10px;
+}
+
 .card {
-  border: 1px solid red;
-  box-shadow: 2px 3px 3px red;
+  border: 2px solid #d1515a;
   background-color: rgb(218, 212, 212);
 }
+
 .form {
   margin-top: 30px;
 }
@@ -171,19 +178,28 @@ h1 {
 .form-control {
   border-radius: 20px;
 }
+
 .form-group {
   margin-top: 30px;
 }
+
 label {
   font-family: "Comic Sans MS", cursive;
   color: rgb(48, 48, 172);
+  margin-bottom: 0.5rem;
 }
+
 .row {
   margin-bottom: 50px;
   margin-top: 50px;
   background-color: rgb(216, 212, 206);
 }
+
+.btn-post-partager {
+  margin-top: 1.5rem;
+}
+
 .mgs {
-  color: red;
+  color: #d1515a;
 }
 </style> 
