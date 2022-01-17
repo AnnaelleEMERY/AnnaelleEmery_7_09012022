@@ -16,7 +16,7 @@
           <router-link to="/profil" class="nav-link">Profil</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/menbre" class="nav-link">Membres</router-link>
+          <router-link to="/membre" class="nav-link">Membres</router-link>
         </li>
         <li class="nav-item">
           <a class="nav-link" @click="logout()">Déconnection</a>

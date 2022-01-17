@@ -23,10 +23,16 @@ const routes = [
       component: () => import('../views/perso.vue'),
     },
     {
-      path: '/menbre',
-      name: 'menbre',
+      path: '/membre',
+      name: 'membre',
       component: () => import('../views/members.vue')
+    },
+    {
+      path: '/membre/:id',
+      name: 'persoMembre',
+      component: () => import('../views/persoMembre.vue'),
     }
+
 ]
 
 const router = createRouter({

@@ -6,13 +6,22 @@
       <div class="first">
         <h6 class="heading">{{ user.firstName }} <br />{{ user.lastName }}</h6>
         <div
-          class="time d-flex flex-row align-items-center justify-content-evenly mt-3"></div>
+          class="
+            time
+            d-flex
+            flex-row
+            align-items-center
+            justify-content-evenly
+            mt-3
+          "
+        ></div>
       </div>
       <div class="second d-flex flex-row mt-2">
         <div class="main">
           <div class="d-flex flex-row mb-1">
             <span> {{ user.email }} </span>
           </div>
+          <button v-if="isAdmin.admin === 'true'" @click.prevent="deleteOneUser(user)">supprimer</button>
         </div>
       </div>
     </div>
@@ -32,7 +41,9 @@ export default {
   data() {
     return {
       users: [],
+      user: [],
       email: "",
+      isAdmin: window.sessionStorage,
     };
   },
   created() {
@@ -50,20 +61,31 @@ export default {
       .catch((err) => console.log(err));
   },
   methods: {
-    deleteOneUser() {
-      const userId = sessionStorage.getItem("user");
+    deleteOneUser(user) {
       axios
-        .delete("http://localhost:3000/api/users/" + userId, {
-          headers: { Authorization: "Bearer " + localStorage.token },
+        .delete("http://localhost:3000/api/users/" + user.id, {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.token,
+          },
         })
-        .then((response) => console.log(response))
-        .catch((err) => console.log(err));
-      sessionStorage.clear();
-      this.$router.push("/");
+        .then((response) => {
+          console.log(response);
+
+          const id = response.data;
+          const userIndex = this.users.findIndex((user) => user.id === id);
+          this.users.splice(userIndex, 1);
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        });
     },
+    
   },
 };
 </script>
+
 
 <style scoped>
 #app {
