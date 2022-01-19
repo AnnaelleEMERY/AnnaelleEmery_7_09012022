@@ -2,29 +2,11 @@
   <navBar />
   <h1>Les membres de Groupomania</h1>
   <div class="container mt-5 d-flex justify-content-center">
-    <div class="card p-4 mt-3" v-for="user in users" v-bind:key="user.id">
-      <div class="first">
+    <div class="card p-4 m-3" v-for="user in users" v-bind:key="user.id">
         <h6 class="heading">{{ user.firstName }} <br />{{ user.lastName }}</h6>
-        <div
-          class="
-            time
-            d-flex
-            flex-row
-            align-items-center
-            justify-content-evenly
-            mt-3
-          "
-        ></div>
+        <p> {{ user.email }} </p>
+        <button v-if="isAdmin.admin === 'true'" @click.prevent="deleteOneUser(user)">supprimer</button>
       </div>
-      <div class="second d-flex flex-row mt-2">
-        <div class="main">
-          <div class="d-flex flex-row mb-1">
-            <span> {{ user.email }} </span>
-          </div>
-          <button v-if="isAdmin.admin === 'true'" @click.prevent="deleteOneUser(user)">supprimer</button>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -81,7 +63,6 @@ export default {
           console.log(error.response.headers);
         });
     },
-    
   },
 };
 </script>

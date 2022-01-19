@@ -1,19 +1,19 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-//package qui est utilisé pour la gestion et la transformation des chemins de ‎‎fichiers‎
+// On donne accès au chemin de notre système de fichier
 const path = require('path');
 const rateLimit = require("express-rate-limit");
-//met les valeurs de donnée importante dans un fichier .env pour les cacher
+// Met les valeurs de données importantes dans un fichier .env pour les cacher
 require("dotenv").config();
-//configure de manière appropriée des en-têtes HTTP pour protéger de certaines vulnérabilités
+// Configure de manière appropriée des en-têtes HTTP pour protéger de certaines vulnérabilités
 const helmet = require('helmet')
 const auth = require('./middleware/auth')
-
+const nocache = require('nocache');
 
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100 // 100 requests per windowMs
+  max: 100 // 100 requests max pour 15min
 });
 
 const userRoutes = require('./routes/user');
@@ -43,7 +43,8 @@ app.use(helmet());
 app.use(limiter);
 
 
-
+//Désactive la mise en cache du navigateur
+app.use(nocache());
 
 
 
