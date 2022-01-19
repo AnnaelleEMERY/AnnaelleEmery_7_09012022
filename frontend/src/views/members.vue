@@ -1,13 +1,20 @@
 <template>
-  <navBar />
-  <h1>Les membres de Groupomania</h1>
-  <div class="container mt-5 d-flex justify-content-center">
-    <div class="card p-4 m-3" v-for="user in users" v-bind:key="user.id">
+  <main>
+    <navBar />
+    <h1>Les membres de Groupomania</h1>
+    <div class="container mt-5 d-flex justify-content-center">
+      <div class="card p-4 m-3" v-for="user in users" v-bind:key="user.id">
         <h6 class="heading">{{ user.firstName }} <br />{{ user.lastName }}</h6>
-        <p> {{ user.email }} </p>
-        <button v-if="isAdmin.admin === 'true'" @click.prevent="deleteOneUser(user)">supprimer</button>
+        <p>{{ user.email }}</p>
+        <button
+          v-if="isAdmin.admin === 'true'"
+          @click.prevent="deleteOneUser(user)"
+        >
+          supprimer
+        </button>
       </div>
-  </div>
+    </div>
+  </main>
 </template>
 
 

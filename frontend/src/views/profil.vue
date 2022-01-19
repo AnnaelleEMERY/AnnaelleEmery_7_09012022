@@ -1,50 +1,55 @@
 <template>
-  <navBar />
-  <h1>Mon Profil</h1>
-  <div class="container mt-5 d-flex justify-content-center">
-    <div class="card p-4 mt-3">
-      <div class="first">
-        <h6 class="heading">{{ user.firstName }} {{ user.lastName }}</h6>
-        <div
-          class="
-            time
-            d-flex
-            flex-row
-            align-items-center
-            justify-content-between
-            mt-3
-          "
-        ></div>
-      </div>
-      <div class="second d-flex flex-row mt-2">
-        <div class="main">
-          <div class="d-flex flex-row mb-1">
-            <span>{{ user.email }} </span>
+  <main>
+    <navBar />
+    <h1>Mon Profil</h1>
+    <div class="container mt-5 d-flex justify-content-center">
+      <div class="card p-4 mt-3">
+        <div class="first">
+          <h6 class="heading">{{ user.firstName }} {{ user.lastName }}</h6>
+          <div
+            class="
+              time
+              d-flex
+              flex-row
+              align-items-center
+              justify-content-between
+              mt-3
+            "
+          ></div>
+        </div>
+        <div class="second d-flex flex-row mt-2">
+          <div class="main">
+            <div class="d-flex flex-row mb-1">
+              <span>{{ user.email }} </span>
+            </div>
           </div>
         </div>
-      </div>
-      <hr class="line-color" />
-      <div class="password">
-        <p class="heading">Changer mon email</p>
-        <label class="change" for="user-email">email:</label><br />
-        <input id="user-email" v-model="user.email" />
+        <hr class="line-color" />
+        <div class="password">
+          <p class="heading">Changer mon email</p>
+          <label class="change" for="user-email">email:</label><br />
+          <input id="user-email" v-model="user.email" />
+          <div class="third mt-4">
+            <button
+              class="btn btn-success btn-block"
+              @click.prevent="modifyProfil(user)"
+            >
+              Modifier
+            </button>
+          </div>
+        </div>
+        <hr class="line-color" />
         <div class="third mt-4">
           <button
             class="btn btn-success btn-block"
-            @click.prevent="modifyProfil(user)"
+            @click.prevent="deleteUser()"
           >
-            Modifier
+            <i class="fas fa-trash"></i> Supprimer le compte
           </button>
         </div>
       </div>
-      <hr class="line-color" />
-      <div class="third mt-4">
-        <button class="btn btn-success btn-block" @click.prevent="deleteUser()">
-          <i class="fas fa-trash"></i> Supprimer le compte
-        </button>
-      </div>
     </div>
-  </div>
+  </main>
 </template>
 
 
@@ -123,7 +128,7 @@ body {
 h1 {
   display: flex;
   justify-content: center;
-  color: #D1515A;
+  color: #d1515a;
   font-family: "Comic Sans MS", cursive;
 }
 
@@ -139,9 +144,9 @@ h1 {
 
 .btn {
   border-radius: 15px !important;
-  color: #D1515A;
-  background-color: #FAEBD7;
-  border: 1px solid #FAEBD7;
+  color: #d1515a;
+  background-color: #faebd7;
+  border: 1px solid #faebd7;
 }
 
 .btn:hover {
@@ -165,5 +170,4 @@ input[type="email"] {
 input {
   width: 80%;
 }
-
 </style>

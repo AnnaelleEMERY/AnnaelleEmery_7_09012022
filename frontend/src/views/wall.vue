@@ -1,7 +1,8 @@
 <template>
-  <navBar />
-  <div class="container">
-    <h1>Mur de conversations</h1>
+  <div>
+    <navBar />
+    <div class="container">
+      <h1>Mur de conversations</h1>
 
       <div id="card">
         <Post
@@ -11,6 +12,7 @@
           @deletePostEvent="deletePost"
         />
       </div>
+    </div>
   </div>
 </template>
 
@@ -74,7 +76,6 @@ export default {
 
 
 <style scoped>
-
 .container {
   font-family: "Comic Sans MS", cursive;
 }

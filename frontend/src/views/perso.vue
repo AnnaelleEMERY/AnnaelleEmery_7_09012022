@@ -1,43 +1,49 @@
 <template>
-  <navBar />
-  <div class="container">
-    <div class="container pb-cmnt-container">
-      <h1>Bienvenue sur ta page {{ user.firstName }} {{ user.lastName }}</h1>
-      <div class="row div-post-creation">
-        <div class="col-md-9 col-md-offset-3">
-          <div class="panel panel-info">
-            <div class="panel-body">
-              <div class="form-group green-border-focus">
-                <label for="title">Sujet</label><br />
-                <input type="text" v-model="title" class="form-control" /><br />
-                <label for="postMsg">Exprimez-vous</label>
-                <textarea
-                  v-model="content"
-                  class="form-control"
-                  id="postMgs"
-                  rows="3"
-                ></textarea>
-                <div class="mgs">{{ message }}</div>
+  <div>
+    <navBar />
+    <div class="container">
+      <div class="container pb-cmnt-container">
+        <h1>Bienvenue sur ta page {{ user.firstName }} {{ user.lastName }}</h1>
+        <div class="row div-post-creation">
+          <div class="col-md-9 col-md-offset-3">
+            <div class="panel panel-info">
+              <div class="panel-body">
+                <div class="form-group green-border-focus">
+                  <label for="title">Sujet</label><br />
+                  <input
+                    type="text"
+                    v-model="title"
+                    class="form-control"
+                  /><br />
+                  <label for="postMsg">Exprimez-vous</label>
+                  <textarea
+                    v-model="content"
+                    class="form-control"
+                    id="postMgs"
+                    rows="3"
+                  ></textarea>
+                  <div class="mgs">{{ message }}</div>
+                </div>
+                <button
+                  class="btn btn-primary pull-right btn-post-partager"
+                  type="text"
+                  @click="postMessage()"
+                >
+                  Partager
+                </button>
               </div>
-              <button
-                class="btn btn-primary pull-right btn-post-partager"
-                type="text"
-                @click="postMessage()"
-              >
-                Partager
-              </button>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <Post
-      v-for="post in posts"
-      v-bind:key="post.id"
-      :post="post"
-      @deletePostEvent="deletePost"
-    />
+      <Post
+        v-for="post in posts"
+        v-bind:key="post.id"
+        :post="post"
+        @deletePostEvent="deletePost"
+      />
+    </div>
   </div>
 </template>
 
