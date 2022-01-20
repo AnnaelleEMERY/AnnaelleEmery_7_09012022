@@ -6,7 +6,7 @@
       <div class="card p-4 m-3" v-for="user in users" v-bind:key="user.id">
         <h6 class="heading">{{ user.firstName }} <br />{{ user.lastName }}</h6>
         <p>{{ user.email }}</p>
-        <button
+        <button class="btn_delete"
           v-if="isAdmin.admin === 'true'"
           @click.prevent="deleteOneUser(user)"
         >
@@ -105,12 +105,20 @@ body {
 h1 {
   display: flex;
   justify-content: center;
-  color: #f11f1f;
+  color: #d1515a;
   font-family: "Comic Sans MS", cursive;
   margin-left: 10px;
 }
-.line-color {
-  color: rgb(224, 17, 17);
-  height: 3px;
+.btn_delete {
+  border: none;
+  border-radius: 15rem;
+  background-color: #d1515a;
+  color: #5e0404;
+  width: 80%;
+  align-self: center;
+}
+.btn_delete:hover {
+  background-color: #5e0404;
+  color: #d1515a;
 }
 </style>

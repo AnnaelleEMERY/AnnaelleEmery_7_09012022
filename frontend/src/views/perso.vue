@@ -25,7 +25,7 @@
                   <div class="mgs">{{ message }}</div>
                 </div>
                 <button
-                  class="btn btn-primary pull-right btn-post-partager"
+                  class="btn btn_primary pull-right btn-post-partager"
                   type="text"
                   @click="postMessage()"
                 >
@@ -202,6 +202,16 @@ label {
 
 .btn-post-partager {
   margin-top: 1.5rem;
+}
+
+.btn_primary {
+  background-color: #091F43;
+  color: white;
+}
+
+.btn_primary:hover {
+  background-color: #D1515A;
+  color: white;
 }
 
 .mgs {

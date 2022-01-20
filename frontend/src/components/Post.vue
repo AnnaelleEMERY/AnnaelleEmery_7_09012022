@@ -16,7 +16,7 @@
     </div>
     <div class="mt-2 d-flex justify-content-end">
       <button
-        class="btn btn-primary btn-sm ms-1"
+        class="btn btn_primary btn-sm ms-1"
         v-if="post.userId === user.id || user.admin === true"
         @click="deletePostEvent"
       >
@@ -35,7 +35,7 @@
         <div class="d-flex flex-column">
           <div class="d-flex flex-column">
             <h6 class="mb-0">
-              {{ comment.user.lastName }} {{ comment.user.firstName }}
+              {{ comment.user.firstName }} {{ comment.user.lastName }}
             </h6>
             <span class="date">{{ formatDate(comment.createdAt) }}</span>
           </div>
@@ -214,6 +214,16 @@ h2 {
 .card {
   border: 2px solid #d1515a;
   background-color: antiquewhite;
+}
+
+.btn_primary {
+  background-color: #091F43;
+  color: white;
+}
+
+.btn_primary:hover {
+  background-color: #D1515A;
+  color: white;
 }
 
 .form {

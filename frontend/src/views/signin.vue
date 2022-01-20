@@ -83,7 +83,7 @@
 
         <button
           type="submit"
-          class="btn btn-primary w-auto justify-content-center"
+          class="btn btn_primary w-auto justify-content-center"
           @click.prevent="userLogin()"
           v-if="mode == 'login'"
         >
@@ -91,7 +91,7 @@
         </button>
         <button
           type="submit"
-          class="btn btn-primary w-auto justify-content-center"
+          class="btn btn_primary w-auto justify-content-center"
           @click.prevent="userRegister()"
           v-else
         >
@@ -216,6 +216,16 @@ h1 {
 
 .btn {
   margin-top: 10px;
+}
+
+.btn_primary {
+  background-color: #D1515A;
+  color: white;
+}
+
+.btn_primary:hover {
+  background-color: #091F43;
+  color: white;
 }
 
 img {
