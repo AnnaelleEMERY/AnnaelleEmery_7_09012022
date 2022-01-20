@@ -76,13 +76,12 @@ export default {
 
 
 <style scoped>
+
 #app {
   font-family: Comic Sans MS, cursive;
   background-color: #cccce2;
 }
-body {
-  background-color: #eee;
-}
+
 .card {
   background-color: #d0cde2;
   width: 350px;
@@ -92,23 +91,28 @@ body {
   -webkit-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
 }
+
 .card:hover {
-  -webkit-transform: scale(1.2);
-  transform: scale(1.2);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
 }
+
 .container {
   flex-wrap: wrap;
 }
+
 .heading {
   font-weight: 700;
 }
+
 h1 {
   display: flex;
   justify-content: center;
   color: #d1515a;
-  font-family: "Comic Sans MS", cursive;
+  font-family: 'Julius Sans One', sans-serif;
   margin-left: 10px;
 }
+
 .btn_delete {
   border: none;
   border-radius: 15rem;
@@ -117,8 +121,10 @@ h1 {
   width: 80%;
   align-self: center;
 }
+
 .btn_delete:hover {
   background-color: #5e0404;
   color: #d1515a;
 }
+
 </style>

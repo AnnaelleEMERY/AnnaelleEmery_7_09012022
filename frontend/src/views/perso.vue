@@ -149,12 +149,13 @@ export default {
 
 
 <style scoped>
+
 body {
   background-color: rgb(218, 214, 210);
 }
 
-main {
-  border: 2px solid #d1515a;
+.main {
+  border: 1px solid #d1515a;
   padding: 1rem;
   background-color: rgb(218, 212, 212);
   margin-top: 2rem;
@@ -162,17 +163,17 @@ main {
 }
 
 .container {
-  font-family: "Comic Sans MS", cursive;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 h1 {
-  font-family: "Comic Sans MS", cursive;
+  font-family: 'Julius Sans One', sans-serif;
   color: #d1515a;
 }
 
 .div-post-creation {
   padding: 1.5rem;
-  border: 2px solid rgb(40, 40, 144);
+  border: 1px solid #091F43;
   border-radius: 5px;
 }
 
@@ -189,9 +190,10 @@ h1 {
 }
 
 label {
-  font-family: "Comic Sans MS", cursive;
+  font-family: 'Exo 2', sans-serif;
   color: rgb(48, 48, 172);
   margin-bottom: 0.5rem;
+  font-size: 1.2rem;
 }
 
 .row {
@@ -202,6 +204,7 @@ label {
 
 .btn-post-partager {
   margin-top: 1.5rem;
+  font-family: 'Julius Sans One', sans-serif;
 }
 
 .btn_primary {

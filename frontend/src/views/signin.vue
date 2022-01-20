@@ -192,6 +192,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
 #app {
   background-color: none !important  ;
 }
@@ -216,6 +217,7 @@ h1 {
 
 .btn {
   margin-top: 10px;
+  font-family: 'Julius Sans One', sans-serif;
 }
 
 .btn_primary {

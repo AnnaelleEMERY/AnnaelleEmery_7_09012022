@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <div class="main">
     <div class="d-flex justify-content-between mt-2">
       <div class="d-flex flex-row">
         <div class="d-flex flex-column">
@@ -69,7 +69,7 @@
         </div>
       </div>
     </div>
-  </main>
+  </div>
 </template>
 <script>
 import axios from "axios";
@@ -216,9 +216,14 @@ h2 {
   background-color: antiquewhite;
 }
 
+.btn {
+  font-family: 'Julius Sans One', sans-serif;
+}
+
 .btn_primary {
   background-color: #091F43;
   color: white;
+  font-family: 'Julius Sans One', sans-serif;
 }
 
 .btn_primary:hover {

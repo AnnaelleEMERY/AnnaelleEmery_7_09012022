@@ -73,7 +73,7 @@ export default {
 }
 
 .navbar-brand img {
-  width: 10rem;
+  width: 10.3rem;
   margin-left: 0em;
   margin-right: 0.5rem;
 }
@@ -87,17 +87,21 @@ export default {
   -webkit-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
 }
+
 .nav-item:hover {
   -webkit-transform: scale(1.2);
   transform: scale(1.2);
 }
+
 .nav-link {
-  font-family: "Comic Sans MS", cursive;
+  font-family: 'Open Sans', sans-serif;
   color: white;
 }
+
 .navbar {
   width: 100%;
   margin-bottom: 40px;
   padding: 0 1rem;
 }
+
 </style>

@@ -76,12 +76,13 @@ export default {
 
 
 <style scoped>
+
 .container {
-  font-family: "Comic Sans MS", cursive;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-main {
-  border: 2px solid #d1515a;
+.main {
+  border: 1px solid #d1515a;
   padding: 1rem;
   background-color: rgb(218, 212, 212);
   margin-top: 2rem;
@@ -89,11 +90,12 @@ main {
 }
 
 h1 {
-  font-family: "Comic Sans MS", cursive;
+  font-family: 'Julius Sans One', sans-serif;
   color: #d1515a;
 }
 
 .form {
   margin-top: 30px;
 }
+
 </style>

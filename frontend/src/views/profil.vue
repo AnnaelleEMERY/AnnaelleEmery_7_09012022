@@ -116,20 +116,17 @@ export default {
 };
 </script>
 <style scoped>
+
 #app {
   font-family: Comic Sans MS, cursive;
   background-color: #cccce2;
-}
-
-body {
-  background-color: #eee;
 }
 
 h1 {
   display: flex;
   justify-content: center;
   color: #d1515a;
-  font-family: "Comic Sans MS", cursive;
+  font-family: 'Julius Sans One', sans-serif;
 }
 
 .card {
