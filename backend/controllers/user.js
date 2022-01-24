@@ -7,11 +7,11 @@ const { users } = require('../models/index.js');
 
 var schema = new passwordValidator();
 schema
-  .is().min(8)
-  .is().max(100)
+  .is().min(7)
+  .is().max(40)
   .has().uppercase()
   .has().lowercase()
-  .has().digits(2)
+  .has().digits(1)
   .has().not().spaces()
   .is().not().oneOf(['Passw0rd', 'Password123']);
 
