@@ -18,7 +18,7 @@ schema
 
 exports.signup = (req, res, next) => {
   if (!mailValidator.validate(req.body.email) || (!schema.validate(req.body.password))) {
-    throw { error: " invalide !" }
+    throw { error: "Email ou mot de passe invalide !" }
   } else if (mailValidator.validate(req.body.email) && (schema.validate(req.body.password)))
     bcrypt.hash(req.body.password, 10)
       .then(hash => {
@@ -42,6 +42,8 @@ exports.signup = (req, res, next) => {
       })
       .catch(error => res.status(500).json({ error }));
 }
+
+
 exports.login = (req, res, next) => {
 
   models.users.findOne({

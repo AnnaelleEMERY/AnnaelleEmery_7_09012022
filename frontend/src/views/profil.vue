@@ -6,16 +6,7 @@
       <div class="card p-4 mt-3">
         <div class="first">
           <h6 class="heading">{{ user.firstName }} {{ user.lastName }}</h6>
-          <div
-            class="
-              time
-              d-flex
-              flex-row
-              align-items-center
-              justify-content-between
-              mt-3
-            "
-          ></div>
+          <div class="time d-flex flex-row align-items-center justify-content-between mt-3"></div>
         </div>
         <div class="second d-flex flex-row mt-2">
           <div class="main">
@@ -115,6 +106,8 @@ export default {
   },
 };
 </script>
+
+
 <style scoped>
 
 #app {
