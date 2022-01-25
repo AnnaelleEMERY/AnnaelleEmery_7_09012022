@@ -10,18 +10,10 @@
               <div class="panel-body">
                 <div class="form-group green-border-focus">
                   <label for="title">Sujet</label><br />
-                  <input
-                    type="text"
-                    v-model="title"
-                    class="form-control"
-                  /><br />
+                  <input type="text" v-model="title" class="form-control" /><br />
+
                   <label for="postMsg">Exprimez-vous</label>
-                  <textarea
-                    v-model="content"
-                    class="form-control"
-                    id="postMgs"
-                    rows="3"
-                  ></textarea>
+                  <textarea v-model="content" class="form-control" id="postMgs" rows="3" ></textarea>
                   <div class="mgs">{{ message }}</div>
                 </div>
                 <button
