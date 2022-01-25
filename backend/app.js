@@ -35,18 +35,11 @@ app.use(express.json());
 app.use('/api/users', userRoutes); 
 app.use('/api/auth/posts', postRoutes); 
 app.use('/api/auth/comments', commentRoutes); 
-app.use('/images', express.static(path.join(__dirname, 'images')));
-
-
 
 app.use(helmet());
 app.use(limiter);
 
-
 //Désactive la mise en cache du navigateur
 app.use(nocache());
-
-
-
 
 module.exports = app;
