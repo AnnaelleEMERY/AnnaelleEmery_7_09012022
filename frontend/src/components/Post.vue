@@ -10,11 +10,58 @@
         </div>
       </div>
     </div>
-    <div class="titleCon">
+
+    <!-- Post affiché -->
+    <div v-if="!modifPost" class="titleCon">
       <p class="title">{{ post.title }}</p>
       <p class="content">{{ post.content }}</p>
     </div>
+
+    <!-- Modification du post (apparition de => input + textarea) -->
+    <div v-else class="d-flex flex-column">
+      <input type="text" class="title" v-model="titleEdited" />
+      <textarea
+        name="textarea"
+        v-model="contentEdited"
+        rows="3"
+        class="content"
+      ></textarea>
+      <div class="mgs">{{ messageEdited }}</div>
+
+      <!-- Boutons 'annuler' et 'modifier' -->
+      <div class="d-flex">
+        <div class="inline-block mt-2">
+          <button
+            class="btn btn_primary btn-sm ms-1"
+            v-if="post.userId === user.id"
+            @click="modifPost = false"
+          >
+            Annuler
+          </button>
+        </div>
+
+        <!-- Boutons 'modifier' pour envoyer les nouvelles données dans l'api -->
+        <div class="inline-block mt-2">
+          <button
+            class="btn btn_primary btn-sm ms-1"
+            v-if="(modifPost = true)"
+            @click="updatePost"
+          >
+            Modifier
+          </button>
+        </div>
+      </div>
+    </div>
+
     <div class="mt-2 d-flex justify-content-end">
+      <button
+        class="btn btn_primary btn-sm ms-1"
+        v-if="post.userId === user.id && !modifPost"
+        @click="modifPost = true"
+      >
+        Modifier
+      </button>
+
       <button
         class="btn btn_primary btn-sm ms-1"
         v-if="post.userId === user.id || user.admin === true"
@@ -23,6 +70,14 @@
         Supprimer
       </button>
     </div>
+
+
+
+
+
+
+
+    <!------------------------- COMMENTAIRES ------------------------->
 
     <div class="card p-3 mt-3">
       <h2>Commentaires</h2>
@@ -40,17 +95,59 @@
             <span class="date">{{ formatDate(comment.createdAt) }}</span>
           </div>
         </div>
+
         <div class="com d-flex justify-content-between">
-          <p class="content">{{ comment.comment }}</p>
-          <button
-            class="btn btn-outline-secondary btn-sm btn-trash"
-            v-if="comment.userId === user.id || user.admin === true"
-            @click.prevent="deleteCom(comment)"
-          >
-            <span class="trash"><i class="fas fa-trash"></i></span>
-          </button>
-        </div>
+          
+          <!-- Commentaire normal -->
+          <div v-if="!modifComment">
+            <p class="content">{{ comment.comment }}</p>
+          </div>
+
+          <!-- Modification du commentaire (apparition de => input) -->
+            <div v-else class="d-flex flex-column w-100">
+              <input type="text" class="title" v-model="commentEdited" />
+              <div class="mgs">{{ messageCommentEdited }}</div>
+  
+              <!-- Boutons 'annuler' et 'modifier' -->
+              <div class="d-flex">
+                <div class="inline-block mt-2">
+                  <button
+                    class="btn btn_primary btn-sm ms-1"
+                    v-if="comment.userId === user.id"
+                    @click="modifComment = false"
+                  >
+                    Annuler
+                  </button>
+                </div>
+  
+                <!-- Boutons 'modifier' pour envoyer les nouvelles données dans l'api -->
+                <div class="inline-block mt-2">
+                  <button
+                    class="btn btn_primary btn-sm ms-1"
+                    v-if="(modifComment = true)"
+                    @click="updateComment"
+                  >
+                    Modifier
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bouton modifier et supprimer -->
+          <div class="d-flex justify-content-end">
+            <button v-if="comment.userId === user.id && !modifComment" class="btn btn_primary me-2" @click="modifComment = true">
+              <span class="pencil"><i class="fas fa-pen"></i></span>
+            </button>
+
+            <button class="btn btn-outline-secondary btn-sm btn-trash" v-if="comment.userId === user.id || user.admin === true" @click.prevent="deleteCom(comment)">
+              <span class="trash"><i class="fas fa-trash"></i></span>
+            </button>
+          </div>
+        
       </div>
+
+      <!-- Ecrire un commentaire -->
       <div class="form">
         <input
           class="form-control"
@@ -88,8 +185,15 @@ export default {
       lastName: "",
       title: "",
       message: "",
+      messageEdited: "",
+      messageCommentEdited: "",
       content: "",
       posts: [],
+      modifPost: false,
+      modifComment: false,
+      titleEdited: "",
+      contentEdited: "",
+      commentEdited: "",
     };
   },
   props: {
@@ -138,6 +242,31 @@ export default {
       this.$emit("deletePostEvent", this.post);
     },
 
+    updatePost() {
+      if (this.titleEdited == "" || this.contentEdited == "") {
+        this.messageEdited = "Vous ne pouvez pas laisser un champ vide";
+      } else {
+        axios
+          .put(
+            "http://localhost:3000/api/auth/posts/" + this.post.id,
+            { content: this.contentEdited, title: this.titleEdited },
+            {
+              headers: {
+                Authorization: "Bearer " + sessionStorage.token,
+              },
+            }
+          )
+          .then((response) => {
+            console.log("response");
+            console.log(response);
+            this.content, (this.title = response.data);
+            console.log("Votre post a bien été modifié");
+            this.$router.go(0);
+          })
+          .catch((err) => console.log(err));
+      }
+    },
+
     createCom(post) {
       if (this.comment == "") {
         this.message = "Ne pas poster avec un champs vide";
@@ -167,6 +296,33 @@ export default {
                 this.message = "";
               })
               .catch((err) => console.log(err));
+          })
+          .catch((err) => console.log(err));
+      }
+    },
+
+    updateComment() {
+      if (this.commentEdited == "") {
+        this.messageCommentEdited = "Vous ne pouvez pas laisser un champ vide";
+      } else {
+        console.log("this.comment.id");
+        console.log(this.comment.id);
+        axios
+          .put(
+            "http://localhost:3000/api/auth/comments/" + this.comment.id,
+            { contentComment: this.commentEdited },
+            {
+              headers: {
+                Authorization: "Bearer " + sessionStorage.token,
+              },
+            }
+          )
+          .then((response) => {
+            console.log("response");
+            console.log(response);
+            this.contentComment = response.data;
+            console.log("Votre commentaire a bien été modifié");
+            this.$router.go(0);
           })
           .catch((err) => console.log(err));
       }
@@ -219,17 +375,17 @@ h2 {
 }
 
 .btn {
-  font-family: 'Julius Sans One', sans-serif;
+  font-family: "Julius Sans One", sans-serif;
 }
 
 .btn_primary {
-  background-color: #091F43;
+  background-color: #091f43;
   color: white;
-  font-family: 'Julius Sans One', sans-serif;
+  font-family: "Julius Sans One", sans-serif;
 }
 
 .btn_primary:hover {
-  background-color: #D1515A;
+  background-color: #d1515a;
   color: white;
 }
 

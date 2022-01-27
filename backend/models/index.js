@@ -24,14 +24,26 @@ db.posts = require("./post.js")(sequelize, Sequelize);
 db.users = require("./user.js")(sequelize, Sequelize)
 db.comments = require("./comment.js")(sequelize, Sequelize)
 
+// Lien entre les utilisateurs et leurs posts
 db.users.hasMany(db.posts)
 db.posts.belongsTo(db.users)
 
+// Lien entre les posts et leurs commentaires
 db.posts.hasMany(db.comments)
 db.comments.belongsTo(db.posts)
 
+// Lien entre les utilisateurs et leurs commentaires
 db.users.hasMany(db.comments)
 db.comments.belongsTo(db.users)
+
+// Si un user est supprimé, alors ses posts aussi
+db.users.hasMany(db.posts, {onDelete: "cascade"});
+
+// Si un user est supprimé, alors ses commentaires aussi
+db.users.hasMany(db.comments, {onDelete: "cascade"});
+
+// Si un post est supprimé, alors ses commentaires aussi
+db.posts.hasMany(db.comments, {onDelete: "cascade"});
 
 db.sequelize.sync({ alter:true });
 

@@ -122,6 +122,7 @@ export default {
           });
       }
     },
+    
     deletePost(item) {
       axios
         .delete("http://localhost:3000/api/auth/posts/" + item.id, {

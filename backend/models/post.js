@@ -4,10 +4,10 @@ module.exports = (sequelize, Sequelize) => sequelize.define("post", {
   id: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    primaryKey : true,
-    autoIncrement :true
+    primaryKey: true,
+    autoIncrement: true
   },
-  title :{
+  title: {
     type: DataTypes.STRING,
     allowNull: false
   },
@@ -15,15 +15,17 @@ module.exports = (sequelize, Sequelize) => sequelize.define("post", {
     type: DataTypes.STRING,
     allowNull: false
   },
-  
-  
+  image: {
+    type: DataTypes.STRING,
+    allowNull: true
+  }
 },
 
- {
-  sequelize, 
-  modelName: 'post' 
- 
-});
+  {
+    sequelize,
+    modelName: 'post'
+
+  });
 
 
 

@@ -1,32 +1,51 @@
-const fs = require('fs'); 
-const models=require('../models/index.js')
+const fs = require('fs');
+const models = require('../models/index.js')
 const jwt = require('jsonwebtoken');
 
 
 exports.deletePost = (req, res, next) => {
     // nous utilisons l'ID que nous recevons comme paramètre pour accéder au post correspondant dans la base de données 
-            models.posts.findOne ({ 
-                where: { id: req.params.id }})          
-                  models.posts.destroy({where:{id: req.params.id }})
-                    .then(() => res.status(200).json({ message: 'post supprimé !'}))
-                    .catch(error => res.status(400).json({ error }));
-            
+    models.posts.findOne({
+        where: { id: req.params.id }
+    })
+    models.posts.destroy({ where: { id: req.params.id } })
+        .then(() => res.status(200).json({ message: 'post supprimé !' }))
+        .catch(error => res.status(400).json({ error }));
+
 };
+
+exports.modifyPost = (req, res, next) => {
+    // nous utilisons l'ID que nous recevons comme paramètre pour accéder au post correspondant dans la base de données 
+    models.posts.findOne({
+        where: { id: req.params.id }
+    })
+        .then(post => {
+            post.title = req.body.title;
+            post.content = req.body.content;
+            post.save()
+                .then(() => res.status(200).json({ message: "post modifié !!" }))
+                .catch(error => {
+                    res.status(400).json({ error })
+                })
+        })
+}
 
 exports.createPost = (req, res, next) => {
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
     const userId = decodedToken.userId;
 
-if (!req.file) {
-    return models.posts.create({
-        userId: userId,
-        content: req.body.content,
-        title: req.body.title,
-    })
-        .then((post) => res.status(201).json(post))
-        .catch((error) => {console.log(error)
-             res.status(500).json(error)});
+    if (!req.file) {
+        return models.posts.create({
+            userId: userId,
+            content: req.body.content,
+            title: req.body.title,
+        })
+            .then((post) => res.status(201).json(post))
+            .catch((error) => {
+                console.log(error)
+                res.status(500).json(error)
+            });
 
     } else if (req.file) {
         models.posts.create({
@@ -34,43 +53,44 @@ if (!req.file) {
             content: req.body.content,
             title: req.body.title,
         })
-            .then((post) => res.status(201).json({post}))
+            .then((post) => res.status(201).json({ post }))
             .catch((error) => res.status(500).json(error));
     }
 };
 
 
-exports.findAllPostUser= (req, res, next) => {
+exports.findAllPostUser = (req, res, next) => {
 
-  models.posts.findAll({
-    order:[[
-        'createdAt', 'DESC'
-   ]],
-    include:{
-        model:models.users,
-    },
-     where: { userId: req.params.userId }
+    models.posts.findAll({
+        order: [[
+            'createdAt', 'DESC'
+        ]],
+        include: {
+            model: models.users,
+        },
+        where: { userId: req.params.userId }
     })
-    .then((post) => res.status(200).json(post))
-    .catch((error) => res.status(500).json(error));
+        .then((post) => res.status(200).json(post))
+        .catch((error) => res.status(500).json(error));
 };
-     
+
 exports.getAllPosts = (req, res, next) => {
     models.posts.findAll({
-        order:[[
-             'createdAt', 'DESC'
+        order: [[
+            'createdAt', 'DESC'
         ]],
-         include:{
-             model:models.users,
-         }}).then(posts => {
-       return res.status(200).json(posts);
-     }).catch(error => {
+        include: {
+            model: models.users,
+        }
+    }).then(posts => {
+        return res.status(200).json(posts);
+    }).catch(error => {
         return res.status(500).json({
-            
-         });
-     });
-    };
 
-    
+        });
+    });
+};
+
+
 
 

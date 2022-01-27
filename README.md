@@ -2,7 +2,11 @@
 Cloner ce dépot Github
 
 **Base de données**
-Se connecter au serveur MySQL de votre choix. Exécutez la commande: 
+Se connecter au serveur MySQL de votre choix. 
+
+*Expliquer comment se connecter au serveur MySQL de son choix.*
+
+Exécutez la commande: 
 create database groupomania2; 
 
 Ajoutez le fichier .env dans le dossier backend et ajoutez-y vos variables de connexion de votre base de données :
@@ -12,7 +16,7 @@ SQL_USER=VotreIdentifiant
 SQL_PASSWORD=VotreMotDePasse
 JWT_KEY='RANDOM_TOKEN_SECRET'
 
-Puis importez le fichier groupomania2.sql
+Puis importez le fichier groupomania2.sql avec la commande :
 mysql -u VotreIdentifiant -p groupomania2 < groupomania2.sql
 
 Il faut remplacer groupomania2.sql par le chemin du fichier dans votre machine.

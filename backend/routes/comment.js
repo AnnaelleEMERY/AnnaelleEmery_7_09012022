@@ -11,7 +11,8 @@ router.post('/',commentCtrl.createComment);
 //requete pour ciblé et afficher un element grace a son id
 router.get('/:postId',commentCtrl.getAllComments);
 
-//requete pour les commentaire
+//requete pour modifier un objet existant
+router.put('/:id',commentCtrl.modifyComment );
 
 //requete pour supprimer un objet existant
 router.delete('/:id',commentCtrl.deleteComment );

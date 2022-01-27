@@ -10,7 +10,6 @@ const helmet = require('helmet')
 const auth = require('./middleware/auth')
 const nocache = require('nocache');
 
-
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100 // 100 requests max pour 15min
@@ -39,7 +38,7 @@ app.use('/api/auth/comments', commentRoutes);
 app.use(helmet());
 app.use(limiter);
 
-//Désactive la mise en cache du navigateur
+// Désactive la mise en cache du navigateur
 app.use(nocache());
 
 module.exports = app;

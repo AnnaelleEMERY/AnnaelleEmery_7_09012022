@@ -27,7 +27,6 @@ const routes = [
       name: 'membre',
       component: () => import('../views/members.vue')
     }
-
 ]
 
 const router = createRouter({
