@@ -82,16 +82,16 @@ export default {
 }
 
 .main {
-  border: 1px solid #d1515a;
   padding: 1rem;
-  background-color: rgb(218, 212, 212);
+  background-color: white;
   margin-top: 2rem;
-  border-radius: 5px;
+  border-radius: 30px;
 }
 
 h1 {
   font-family: 'Julius Sans One', sans-serif;
   color: #d1515a;
+  font-weight: 900;
 }
 
 .form {

@@ -8,6 +8,10 @@ html, body {
   height: 100%;
 }
 
+body {
+  background-color: #091f43;
+}
+
 .container:last-child {
   padding-bottom: 5rem;
 }

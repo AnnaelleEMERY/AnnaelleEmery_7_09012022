@@ -16,7 +16,7 @@ router.post('/post',multer , postCtrl.createPost);
 router.get('/:userId',postCtrl.findAllPostUser);
 
 //requete pour modifier un objet existant
-router.put('/:id',postCtrl.modifyPost );
+router.put('/:id', multer, postCtrl.modifyPost );
 
 //requete pour supprimer un objet existant
 router.delete('/:id',postCtrl.deletePost );

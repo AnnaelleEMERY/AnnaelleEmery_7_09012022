@@ -120,6 +120,7 @@ h1 {
   justify-content: center;
   color: #d1515a;
   font-family: 'Julius Sans One', sans-serif;
+  font-weight: 900;
 }
 
 .card {

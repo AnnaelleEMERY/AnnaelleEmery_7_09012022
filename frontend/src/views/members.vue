@@ -111,6 +111,7 @@ h1 {
   color: #d1515a;
   font-family: 'Julius Sans One', sans-serif;
   margin-left: 10px;
+  font-weight: 900;
 }
 
 .btn_delete {

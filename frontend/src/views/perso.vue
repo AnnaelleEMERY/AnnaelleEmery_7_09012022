@@ -206,15 +206,14 @@ export default {
 
 <style scoped>
 body {
-  background-color: rgb(218, 214, 210);
+  background-color: white;
 }
 
 .main {
-  border: 1px solid #d1515a;
-  padding: 1rem;
-  background-color: rgb(218, 212, 212);
+  padding-bottom: 2rem;
+  background-color: white;
   margin-top: 2rem;
-  border-radius: 5px;
+  border-radius: 30px;
 }
 
 .container {
@@ -224,12 +223,12 @@ body {
 h1 {
   font-family: "Julius Sans One", sans-serif;
   color: #d1515a;
+  font-weight: 900;
 }
 
 .div-post-creation {
   padding: 1.5rem;
-  border: 1px solid #091f43;
-  border-radius: 5px;
+  border-radius: 30px;
 }
 
 .form {
@@ -246,9 +245,13 @@ h1 {
 
 label {
   font-family: "Exo 2", sans-serif;
-  color: rgb(48, 48, 172);
+  color: #091F43;
   margin-bottom: 0.5rem;
   font-size: 1.2rem;
+}
+
+.custom-file-input {
+  padding-top: 1rem;
 }
 
 .row {

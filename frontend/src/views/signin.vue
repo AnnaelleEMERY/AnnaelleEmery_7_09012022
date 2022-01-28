@@ -209,6 +209,7 @@ h1 {
   font-size: larger;
   margin-top: 10px;
   color: #d1515a;
+  font-weight: 900;
 }
 
 .form-floating {

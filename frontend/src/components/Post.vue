@@ -1,83 +1,94 @@
 <template>
   <div class="main">
-    <div class="d-flex justify-content-between mt-2">
-      <div class="d-flex flex-row">
-        <div class="d-flex flex-column">
-          <h6 class="mb-0">
-            {{ post.user.firstName }} {{ post.user.lastName }}
-          </h6>
-          <span class="date"> {{ formatDate(post.createdAt) }} </span>
+    <div class="div-post">
+      <div class="d-flex justify-content-between mt-2">
+        <div class="d-flex flex-row">
+          <div class="d-flex flex-column">
+            <h6 class="mb-0">
+              {{ post.user.firstName }} {{ post.user.lastName }}
+            </h6>
+            <span class="date"> {{ formatDate(post.createdAt) }} </span>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Post affiché -->
-    <div v-if="!modifPost" class="titleCon">
-      <p class="title">{{ post.title }}</p>
-      <div class="divImage d-flex justify-content-center">
-        <img v-if="post.image != null" :src="post.image" :alt="post.title" />
-      </div>
-      <p class="content">{{ post.content }}</p>
-    </div>
-
-    <!-- Modification du post (apparition de => input + textarea) -->
-    <div v-else class="d-flex flex-column">
-      <input type="text" class="title" v-model="titleEdited" />
-      <textarea
-        name="textarea"
-        v-model="contentEdited"
-        rows="3"
-        class="content"
-      ></textarea>
-      <div class="mgs">{{ messageEdited }}</div>
-
-      <!-- Boutons 'annuler' et 'modifier' -->
-      <div class="d-flex">
-        <div class="inline-block mt-2">
-          <button
-            class="btn btn_primary btn-sm ms-1"
-            v-if="post.userId === user.id"
-            @click="modifPost = false"
-          >
-            Annuler
-          </button>
+      <!-- Post affiché -->
+      <div v-if="!modifPost" class="titleCon">
+        <p class="title">{{ post.title }}</p>
+        <div class="divImage d-flex justify-content-center mb-2 mt-2">
+          <img v-if="post.image != null" :src="post.image" :alt="post.title" />
         </div>
+        <p class="content">{{ post.content }}</p>
+      </div>
 
-        <!-- Boutons 'modifier' pour envoyer les nouvelles données dans l'api -->
-        <div class="inline-block mt-2">
-          <button
-            class="btn btn_primary btn-sm ms-1"
-            v-if="(modifPost = true)"
-            @click="updatePost"
-          >
-            Modifier
-          </button>
+      <!-- Modification du post (apparition de => input + textarea) -->
+      <div v-else class="d-flex flex-column">
+        <input type="text" class="title" v-model="titleEdited" />
+
+        <textarea
+          name="textarea"
+          v-model="contentEdited"
+          rows="3"
+          class="content"
+        ></textarea>
+
+        <input
+          class="custom-file-input"
+          type="file"
+          accept="image/*"
+          @change="uploadImage($event)"
+          id="file-input"
+          ref="fileInput"
+        />
+        <div class="mgs">{{ messageEdited }}</div>
+
+        <!-- Boutons 'annuler' et 'modifier' -->
+        <div class="d-flex">
+          <div class="inline-block mt-2">
+            <button
+              class="btn btn_primary btn-sm ms-1"
+              v-if="post.userId === user.id"
+              @click="modifPost = false"
+            >
+              Annuler
+            </button>
+          </div>
+
+          <!-- Boutons 'modifier' pour envoyer les nouvelles données dans l'api -->
+          <div class="inline-block mt-2">
+            <button
+              class="btn btn_primary btn-sm ms-1"
+              v-if="(modifPost = true)"
+              @click="updatePost"
+            >
+              Modifier
+            </button>
+          </div>
         </div>
       </div>
+
+      <div class="mt-2 d-flex justify-content-end">
+        <button
+          class="btn btn_primary btn-sm ms-1"
+          v-if="post.userId === user.id && !modifPost"
+          @click="modifPost = true"
+        >
+          Modifier
+        </button>
+
+        <button
+          class="btn btn_primary btn-sm ms-1"
+          v-if="post.userId === user.id || user.admin === true"
+          @click="deletePostEvent"
+        >
+          Supprimer
+        </button>
+      </div>
     </div>
-
-    <div class="mt-2 d-flex justify-content-end">
-      <button
-        class="btn btn_primary btn-sm ms-1"
-        v-if="post.userId === user.id && !modifPost"
-        @click="modifPost = true"
-      >
-        Modifier
-      </button>
-
-      <button
-        class="btn btn_primary btn-sm ms-1"
-        v-if="post.userId === user.id || user.admin === true"
-        @click="deletePostEvent"
-      >
-        Supprimer
-      </button>
-    </div>
-
     <!------------------------- COMMENTAIRES ------------------------->
 
     <div class="card p-3 mt-3">
-      <h2>Commentaires</h2>
+      <h2 class="com_h2">Commentaires</h2>
       <div
         class="commentDiv d-flex flex-column mt-2"
         v-for="comment in comments"
@@ -154,10 +165,12 @@ export default {
       messageCommentEdited: "",
       content: "",
       image: "",
+      file: "",
       posts: [],
       modifPost: false,
       titleEdited: "",
       contentEdited: "",
+      imageEdited: "",
     };
   },
   props: {
@@ -206,14 +219,24 @@ export default {
       this.$emit("deletePostEvent", this.post);
     },
 
+    // Ajout d'une image dans le post
+    uploadImage(e) {
+      console.log(this.file);
+      this.file = e.target.files[0];
+    },
+
     updatePost() {
       if (this.titleEdited == "" || this.contentEdited == "") {
         this.messageEdited = "Vous ne pouvez pas laisser un champ vide";
-      } else {
+      } else if (this.file) {
+        const formData = new FormData();
+        formData.append("contentEdited", this.contentEdited);
+        formData.append("titleEdited", this.titleEdited);
+        formData.append("file", this.file, this.file.name);
         axios
           .put(
             "http://localhost:3000/api/auth/posts/" + this.post.id,
-            { content: this.contentEdited, title: this.titleEdited },
+            formData,
             {
               headers: {
                 Authorization: "Bearer " + sessionStorage.token,
@@ -223,7 +246,10 @@ export default {
           .then((response) => {
             console.log("response");
             console.log(response);
-            this.content, (this.title = response.data);
+            this.$emit("added", response.data);
+            this.contentEdited = "";
+            this.titleEdited = "";
+            this.file = "";
             console.log("Votre post a bien été modifié");
             this.$router.go(0);
           })
@@ -297,10 +323,20 @@ export default {
 h1 {
   font-family: "Comic Sans MS", cursive;
   color: #d1515a;
+  font-weight: 900;
 }
 
 h2 {
   font-size: smaller;
+}
+
+h6 {
+  font-weight: 600;
+}
+
+.com_h2 {
+  border-top: 1px solid #d1515a;
+  padding-top: 1rem;
 }
 
 .date {
@@ -308,8 +344,11 @@ h2 {
 }
 
 .card {
-  border: 2px solid #d1515a;
-  background-color: antiquewhite;
+  border: none;
+}
+
+.div-post {
+  padding: 1rem;
 }
 
 .commentDiv {

@@ -1,4 +1,5 @@
 const fs = require('fs');
+const post = require('../models/post');
 const models = require('../models/index.js')
 const jwt = require('jsonwebtoken');
 
@@ -8,42 +9,57 @@ exports.deletePost = (req, res, next) => {
     models.posts.findOne({
         where: { id: req.params.id }
     })
-    models.posts.destroy({ where: { id: req.params.id } })
-        .then(() => res.status(200).json({ message: 'post supprimé !' }))
+        .then(post => {
+            const filename = post.image.split('/images/')[1];
+            fs.unlink(`images/${filename}`, () => {
+                models.posts.destroy({ where: { id: req.params.id } })
+                    .then(() => res.status(200).json({ message: 'post supprimé !' }))
+                    .catch(error => res.status(400).json({ error }));
+            })
+        })
         .catch(error => res.status(400).json({ error }));
-
 };
 
 exports.modifyPost = (req, res, next) => {
-    // nous utilisons l'ID que nous recevons comme paramètre pour accéder au post correspondant dans la base de données 
-    models.posts.findOne({
-        where: { id: req.params.id }
-    })
-        .then(post => {
-            post.title = req.body.title;
-            post.content = req.body.content;
-            post.save()
-                .then(() => res.status(200).json({ message: "post modifié !!" }))
-                .catch(error => {
-                    res.status(400).json({ error })
-                })
+    if (req.file) {
+        models.posts.findOne({
+            where: { id: req.params.id }
         })
+            .then(post => {
+                const filename = post.image.split('/images/')[1];
+                fs.unlink('images/' + filename, () => { });
+            })
+            .catch(error => console.log('Echec de la suppression de l\'ancienne image'));
+    }
+
+    models.posts.update({
+        content: req.body.contentEdited,
+        title: req.body.titleEdited,
+        image: req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null,
+    })
+        .then(() => res.status(200).json({ message: 'Sauce modifiée !' }))
+        .catch(error => res.status(400).json({ error }));
 }
+
+
+
+
+
 
 exports.createPost = (req, res, next) => {
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
     const userId = decodedToken.userId;
 
-        models.posts.create({
-            userId: userId,
-            content: req.body.content,
-            title: req.body.title,
-            image: req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null,
-        })
-            .then((post) => res.status(201).json({ post }))
-            .catch((error) => res.status(500).json(error));
-    }
+    models.posts.create({
+        userId: userId,
+        content: req.body.content,
+        title: req.body.title,
+        image: req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null,
+    })
+        .then((post) => res.status(201).json({ post }))
+        .catch((error) => res.status(500).json(error));
+}
 
 
 exports.findAllPostUser = (req, res, next) => {
