@@ -82,7 +82,7 @@
     <div class="card p-3 mt-3">
       <h2>Commentaires</h2>
       <div
-        class="d-flex flex-column mt-2"
+        class="commentDiv d-flex flex-column mt-2"
         v-for="comment in comments"
         v-bind:key="comment.id"
         :comment="comment"
@@ -103,47 +103,18 @@
             <p class="content">{{ comment.comment }}</p>
           </div>
 
-          <!-- Modification du commentaire (apparition de => input) -->
-            <div v-else class="d-flex flex-column w-100">
-              <input type="text" class="title" v-model="commentEdited" />
-              <div class="mgs">{{ messageCommentEdited }}</div>
-  
-              <!-- Boutons 'annuler' et 'modifier' -->
-              <div class="d-flex">
-                <div class="inline-block mt-2">
-                  <button
-                    class="btn btn_primary btn-sm ms-1"
-                    v-if="comment.userId === user.id"
-                    @click="modifComment = false"
-                  >
-                    Annuler
-                  </button>
-                </div>
-  
-                <!-- Boutons 'modifier' pour envoyer les nouvelles données dans l'api -->
-                <div class="inline-block mt-2">
-                  <button
-                    class="btn btn_primary btn-sm ms-1"
-                    v-if="(modifComment = true)"
-                    @click="updateComment"
-                  >
-                    Modifier
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Bouton modifier et supprimer -->
-          <div class="d-flex justify-content-end">
-            <button v-if="comment.userId === user.id && !modifComment" class="btn btn_primary me-2" @click="modifComment = true">
-              <span class="pencil"><i class="fas fa-pen"></i></span>
-            </button>
+          
+            <!-- Bouton modifier et supprimer -->
+            <div class="d-flex justify-content-end">
 
             <button class="btn btn-outline-secondary btn-sm btn-trash" v-if="comment.userId === user.id || user.admin === true" @click.prevent="deleteCom(comment)">
               <span class="trash"><i class="fas fa-trash"></i></span>
             </button>
           </div>
+          </div>
+
+          
+          
         
       </div>
 
@@ -190,10 +161,8 @@ export default {
       content: "",
       posts: [],
       modifPost: false,
-      modifComment: false,
       titleEdited: "",
       contentEdited: "",
-      commentEdited: "",
     };
   },
   props: {
@@ -302,33 +271,6 @@ export default {
       }
     },
 
-    updateComment() {
-      if (this.commentEdited == "") {
-        this.messageCommentEdited = "Vous ne pouvez pas laisser un champ vide";
-      } else {
-        console.log("this");
-        console.log(this);
-        axios
-          .put(
-            "http://localhost:3000/api/auth/comments/comment/" + this.comment.id,
-            { contentComment: this.commentEdited },
-            {
-              headers: {
-                Authorization: "Bearer " + sessionStorage.token,
-              },
-            }
-          )
-          .then((response) => {
-            console.log("response");
-            console.log(response);
-            this.contentComment = response.data;
-            console.log("Votre commentaire a bien été modifié");
-            this.$router.go(0);
-          })
-          .catch((err) => console.log(err));
-      }
-    },
-
     deleteCom(comment) {
       axios
         .delete("http://localhost:3000/api/auth/comments/" + comment.id, {
@@ -375,6 +317,12 @@ h2 {
   background-color: antiquewhite;
 }
 
+.commentDiv {
+  padding: 1rem 0rem;
+  border-bottom: 1px solid #d1515a;
+  border-width: 50%;
+}
+
 .btn {
   font-family: "Julius Sans One", sans-serif;
 }
@@ -396,6 +344,8 @@ h2 {
 
 .btn-trash {
   border: 1px solid #d1515a;
+  padding: 0.5rem;
+  height: fit-content;
 }
 
 .btn-trash:hover {
