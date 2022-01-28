@@ -97,7 +97,7 @@
         </div>
 
         <div class="com d-flex justify-content-between">
-          
+
           <!-- Commentaire normal -->
           <div v-if="!modifComment">
             <p class="content">{{ comment.comment }}</p>
@@ -291,6 +291,7 @@ export default {
                 },
               })
               .then((response) => {
+                console.log(" que l'on recherche");
                 console.log(response);
                 this.comments = response.data;
                 this.message = "";
@@ -305,11 +306,11 @@ export default {
       if (this.commentEdited == "") {
         this.messageCommentEdited = "Vous ne pouvez pas laisser un champ vide";
       } else {
-        console.log("this.comment.id");
-        console.log(this.comment.id);
+        console.log("this");
+        console.log(this);
         axios
           .put(
-            "http://localhost:3000/api/auth/comments/" + this.comment.id,
+            "http://localhost:3000/api/auth/comments/comment/" + this.comment.id,
             { contentComment: this.commentEdited },
             {
               headers: {
