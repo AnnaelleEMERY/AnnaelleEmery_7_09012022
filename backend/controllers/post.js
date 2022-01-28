@@ -35,28 +35,15 @@ exports.createPost = (req, res, next) => {
     const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
     const userId = decodedToken.userId;
 
-    if (!req.file) {
-        return models.posts.create({
-            userId: userId,
-            content: req.body.content,
-            title: req.body.title,
-        })
-            .then((post) => res.status(201).json(post))
-            .catch((error) => {
-                console.log(error)
-                res.status(500).json(error)
-            });
-
-    } else if (req.file) {
         models.posts.create({
             userId: userId,
             content: req.body.content,
             title: req.body.title,
+            image: req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null,
         })
             .then((post) => res.status(201).json({ post }))
             .catch((error) => res.status(500).json(error));
     }
-};
 
 
 exports.findAllPostUser = (req, res, next) => {

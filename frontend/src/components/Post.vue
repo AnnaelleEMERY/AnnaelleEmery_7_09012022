@@ -14,6 +14,9 @@
     <!-- Post affiché -->
     <div v-if="!modifPost" class="titleCon">
       <p class="title">{{ post.title }}</p>
+      <div class="divImage d-flex justify-content-center">
+        <img v-if="post.image != null" :src="post.image" :alt="post.title" />
+      </div>
       <p class="content">{{ post.content }}</p>
     </div>
 
@@ -71,12 +74,6 @@
       </button>
     </div>
 
-
-
-
-
-
-
     <!------------------------- COMMENTAIRES ------------------------->
 
     <div class="card p-3 mt-3">
@@ -97,25 +94,22 @@
         </div>
 
         <div class="com d-flex justify-content-between">
-
           <!-- Commentaire normal -->
-          <div v-if="!modifComment">
+          <div>
             <p class="content">{{ comment.comment }}</p>
           </div>
 
-          
-            <!-- Bouton modifier et supprimer -->
-            <div class="d-flex justify-content-end">
-
-            <button class="btn btn-outline-secondary btn-sm btn-trash" v-if="comment.userId === user.id || user.admin === true" @click.prevent="deleteCom(comment)">
+          <!-- Bouton modifier et supprimer -->
+          <div class="d-flex justify-content-end">
+            <button
+              class="btn btn-outline-secondary btn-sm btn-trash"
+              v-if="comment.userId === user.id || user.admin === true"
+              @click.prevent="deleteCom(comment)"
+            >
               <span class="trash"><i class="fas fa-trash"></i></span>
             </button>
           </div>
-          </div>
-
-          
-          
-        
+        </div>
       </div>
 
       <!-- Ecrire un commentaire -->
@@ -159,6 +153,7 @@ export default {
       messageEdited: "",
       messageCommentEdited: "",
       content: "",
+      image: "",
       posts: [],
       modifPost: false,
       titleEdited: "",
@@ -321,6 +316,10 @@ h2 {
   padding: 1rem 0rem;
   border-bottom: 1px solid #d1515a;
   border-width: 50%;
+}
+
+.divImage img {
+  max-width: 20rem;
 }
 
 .btn {

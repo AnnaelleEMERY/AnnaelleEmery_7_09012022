@@ -10,10 +10,32 @@
               <div class="panel-body">
                 <div class="form-group green-border-focus">
                   <label for="title">Sujet</label><br />
-                  <input type="text" v-model="title" class="form-control" /><br />
+                  <input
+                    type="text"
+                    v-model="title"
+                    class="form-control"
+                  /><br />
 
                   <label for="postMsg">Exprimez-vous</label>
-                  <textarea v-model="content" class="form-control" id="postMgs" rows="3" ></textarea>
+                  <textarea
+                    v-model="content"
+                    class="form-control"
+                    id="postMgs"
+                    rows="3"
+                  ></textarea>
+
+                  <!-- IMAGE -->
+                  <div>
+                    <input
+                      class="custom-file-input"
+                      type="file"
+                      accept="image/*"
+                      @change="uploadImage($event)"
+                      id="file-input"
+                      ref="fileInput"
+                    />
+                  </div>
+
                   <div class="mgs">{{ message }}</div>
                 </div>
                 <button
@@ -55,6 +77,8 @@ export default {
       user: [],
       posts: [],
       users: [],
+      image: "",
+      file: "",
       content: "",
       post: [],
       comment: [],
@@ -63,6 +87,7 @@ export default {
       message: "",
     };
   },
+
   created() {
     const userId = sessionStorage.getItem("user");
     axios
@@ -91,19 +116,51 @@ export default {
     postMessage() {
       if (this.content == "" || this.title == "") {
         this.message = "Veuillez inscrire un sujet et un message";
-      } else {
+      } else if (this.file) {
+        const formData = new FormData();
+        formData.append("content", this.content);
+        formData.append("title", this.title);
+        formData.append("file", this.file, this.file.name);
         axios
-          .post(
-            "http://localhost:3000/api/auth/posts/post",
-            { content: this.content, title: this.title },
-            {
-              headers: {
-                Authorization: "Bearer " + sessionStorage.token,
-              },
-            }
-          )
+          .post("http://localhost:3000/api/auth/posts/post", formData, {
+            headers: {
+              Authorization: "Bearer " + sessionStorage.token,
+            },
+          })
           .then((response) => {
             console.log(response);
+            this.$emit("added", response.data);
+            this.content = "";
+            this.title = "";
+            this.file = "";
+            const userId = sessionStorage.getItem("user");
+            axios
+              .get("http://localhost:3000/api/auth/posts/" + userId, {
+                headers: {
+                  Authorization: "Bearer " + sessionStorage.token,
+                },
+              })
+              .then((response) => {
+                console.log(response);
+                this.posts = response.data;
+                this.message = "";
+              })
+              .catch((err) => console.log(err));
+          });
+      } else {
+        const payload = {
+          content: this.content,
+          title: this.title,
+        };
+        axios
+          .post("http://localhost:3000/api/auth/posts/post", payload, {
+            headers: {
+              Authorization: "Bearer " + sessionStorage.token,
+            },
+          })
+          .then((response) => {
+            console.log(response);
+            this.$emit("added", response.data);
             this.content = "";
             this.title = "";
             const userId = sessionStorage.getItem("user");
@@ -122,7 +179,13 @@ export default {
           });
       }
     },
-    
+
+    // Ajout d'une image dans le post
+    uploadImage(e) {
+      console.log(this.file);
+      this.file = e.target.files[0];
+    },
+
     deletePost(item) {
       axios
         .delete("http://localhost:3000/api/auth/posts/" + item.id, {
@@ -142,7 +205,6 @@ export default {
 
 
 <style scoped>
-
 body {
   background-color: rgb(218, 214, 210);
 }
@@ -160,13 +222,13 @@ body {
 }
 
 h1 {
-  font-family: 'Julius Sans One', sans-serif;
+  font-family: "Julius Sans One", sans-serif;
   color: #d1515a;
 }
 
 .div-post-creation {
   padding: 1.5rem;
-  border: 1px solid #091F43;
+  border: 1px solid #091f43;
   border-radius: 5px;
 }
 
@@ -183,7 +245,7 @@ h1 {
 }
 
 label {
-  font-family: 'Exo 2', sans-serif;
+  font-family: "Exo 2", sans-serif;
   color: rgb(48, 48, 172);
   margin-bottom: 0.5rem;
   font-size: 1.2rem;
@@ -197,16 +259,16 @@ label {
 
 .btn-post-partager {
   margin-top: 1.5rem;
-  font-family: 'Julius Sans One', sans-serif;
+  font-family: "Julius Sans One", sans-serif;
 }
 
 .btn_primary {
-  background-color: #091F43;
+  background-color: #091f43;
   color: white;
 }
 
 .btn_primary:hover {
-  background-color: #D1515A;
+  background-color: #d1515a;
   color: white;
 }
 
