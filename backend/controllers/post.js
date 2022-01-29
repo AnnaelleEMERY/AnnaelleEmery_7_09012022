@@ -6,16 +6,23 @@ const jwt = require('jsonwebtoken');
 
 exports.deletePost = (req, res, next) => {
     // nous utilisons l'ID que nous recevons comme paramètre pour accéder au post correspondant dans la base de données 
+
     models.posts.findOne({
         where: { id: req.params.id }
     })
         .then(post => {
-            const filename = post.image.split('/images/')[1];
-            fs.unlink(`images/${filename}`, () => {
+            if (post.image != null) {
+                const filename = post.image.split('/images/')[1];
+                fs.unlink(`images/${filename}`, () => {
+                    models.posts.destroy({ where: { id: req.params.id } })
+                        .then(() => res.status(200).json({ message: 'post supprimé !' }))
+                        .catch(error => res.status(400).json({ error }));
+                })
+            } else {
                 models.posts.destroy({ where: { id: req.params.id } })
                     .then(() => res.status(200).json({ message: 'post supprimé !' }))
                     .catch(error => res.status(400).json({ error }));
-            })
+            }
         })
         .catch(error => res.status(400).json({ error }));
 };
