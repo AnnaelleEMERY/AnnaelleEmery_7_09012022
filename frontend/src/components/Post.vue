@@ -33,7 +33,7 @@
         ></textarea>
 
         <input
-          class="custom-file-input"
+          class="custom-file-input mt-2"
           type="file"
           accept="image/*"
           @change="uploadImage($event)"
@@ -240,10 +240,15 @@ export default {
     updatePost() {
       if (this.titleEdited == "" || this.contentEdited == "") {
         this.messageEdited = "Vous ne pouvez pas laisser un champ vide";
-      } else if (this.file) {
+      // Si la modification contient une image dans le file
+      } else {
         const formData = new FormData();
         formData.append("contentEdited", this.contentEdited);
         formData.append("titleEdited", this.titleEdited);
+        if (typeof this.file === "string") {
+          this.file = {};
+        }
+        console.log(typeof this.file);
         formData.append("file", this.file, this.file.name);
         axios
           .put(
@@ -370,7 +375,7 @@ h6 {
 }
 
 .divImage img {
-  max-width: 20rem;
+  max-width: 100%;
 }
 
 .btn {

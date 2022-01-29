@@ -28,24 +28,35 @@ exports.deletePost = (req, res, next) => {
 };
 
 exports.modifyPost = (req, res, next) => {
-    if (req.file) {
-        models.posts.findOne({
-            where: { id: req.params.id }
-        })
-            .then(post => {
+    // On trouve le post à modifier
+    models.posts.findOne({
+        where: { id: req.params.id }
+    })
+        .then(post => {
+            console.log(post.image);
+            // Si le post comportait déjà une image
+            if (post.image != null) {
+                // On supprime l'ancienne
                 const filename = post.image.split('/images/')[1];
                 fs.unlink('images/' + filename, () => { });
-            })
-            .catch(error => console.log('Echec de la suppression de l\'ancienne image'));
-    }
 
-    models.posts.update({
-        content: req.body.contentEdited,
-        title: req.body.titleEdited,
-        image: req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null,
-    })
-        .then(() => res.status(200).json({ message: 'Sauce modifiée !' }))
-        .catch(error => res.status(400).json({ error }));
+                // On ajoute les modifications
+                post.title = req.body.titleEdited;
+                post.content = req.body.contentEdited;
+                post.image = req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null,
+                post.save()
+
+            // Si le post ne comportait pas d'image à la base
+            } else {
+                // On ajoute les modifications
+                post.title = req.body.titleEdited;
+                post.content = req.body.contentEdited;
+                post.image = req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null,
+                post.save()
+            }
+        })
+        .then(() => res.status(200).json({ message: "post modifié !!" }))
+        .catch(error => console.log('Echec de la modification du post'));
 }
 
 
