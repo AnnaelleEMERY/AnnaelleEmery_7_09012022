@@ -245,11 +245,11 @@ export default {
         const formData = new FormData();
         formData.append("contentEdited", this.contentEdited);
         formData.append("titleEdited", this.titleEdited);
-        if (typeof this.file === "string") {
-          this.file = {};
+        if (typeof this.file != "string") {
+          formData.append("file", this.file, this.file.name);
         }
         console.log(typeof this.file);
-        formData.append("file", this.file, this.file.name);
+        
         axios
           .put(
             "http://localhost:3000/api/auth/posts/" + this.post.id,
