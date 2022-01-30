@@ -23,9 +23,10 @@
 
       <!-- Modification du post (apparition de => input + textarea) -->
       <div v-else class="d-flex flex-column">
-        <input type="text" class="title" v-model="titleEdited" />
+        <input type="text" id="textTitle" class="title" v-model="titleEdited" />
 
         <textarea
+          id="textContent"
           name="textarea"
           v-model="contentEdited"
           rows="3"
@@ -168,8 +169,8 @@ export default {
       file: "",
       posts: [],
       modifPost: false,
-      titleEdited: "",
-      contentEdited: "",
+      titleEdited: this.post.title,
+      contentEdited: this.post.content,
       imageEdited: "",
     };
   },
@@ -179,6 +180,7 @@ export default {
       required: true,
     },
   },
+
   created() {
     const userId = sessionStorage.getItem("user");
     axios
@@ -225,19 +227,9 @@ export default {
       this.file = e.target.files[0];
     },
 
-    /* 
-    On veut faire : 
-      If il y a déjà une image 
-        => If il n'y a pas d'image dans le file on supprime l'ancienne
-        => Else if il y en a une nouvelle on supprime l'ancienne et on met la nouvelle
-      
-      Else il n'y a pas déjà une image 
-        => If il n'y a pas d'image dans le file on n'ajoute pas d'image
-        => Else if il y a une image dans le file on ajoute cette image au post
-
-    */
 
     updatePost() {
+
       if (this.titleEdited == "" || this.contentEdited == "") {
         this.messageEdited = "Vous ne pouvez pas laisser un champ vide";
       // Si la modification contient une image dans le file
