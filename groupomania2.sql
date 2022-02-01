@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 25 jan. 2022 à 13:13
+-- Généré le : mar. 01 fév. 2022 à 18:43
 -- Version du serveur :  8.0.27
 -- Version de PHP : 7.3.21
 
@@ -28,15 +28,17 @@ SET time_zone = "+00:00";
 --
 
 DROP TABLE IF EXISTS `comments`;
-CREATE TABLE `comments` (
-  `id` int NOT NULL,
+CREATE TABLE IF NOT EXISTS `comments` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `comment` varchar(255) NOT NULL,
   `createdAt` datetime DEFAULT NULL,
   `updatedAt` datetime DEFAULT NULL,
   `postId` int DEFAULT NULL,
-  `userId` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
+  `userId` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `comments_ibfk_247` (`postId`),
+  KEY `comments_ibfk_248` (`userId`)
+) ENGINE=InnoDB AUTO_INCREMENT=131 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 -- --------------------------------------------------------
@@ -46,14 +48,17 @@ CREATE TABLE `comments` (
 --
 
 DROP TABLE IF EXISTS `posts`;
-CREATE TABLE `posts` (
-  `id` int NOT NULL,
+CREATE TABLE IF NOT EXISTS `posts` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `content` varchar(255) NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   `userId` int DEFAULT NULL,
-  `title` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `title` varchar(255) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `posts_ibfk_1` (`userId`)
+) ENGINE=InnoDB AUTO_INCREMENT=337 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 -- --------------------------------------------------------
@@ -63,68 +68,29 @@ CREATE TABLE `posts` (
 --
 
 DROP TABLE IF EXISTS `users`;
-CREATE TABLE `users` (
-  `id` int NOT NULL,
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `firstName` varchar(255) NOT NULL,
   `lastName` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
-  `admin` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Index pour les tables déchargées
---
-
---
--- Index pour la table `comments`
---
-ALTER TABLE `comments`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `comments_ibfk_247` (`postId`),
-  ADD KEY `comments_ibfk_248` (`userId`);
-
---
--- Index pour la table `posts`
---
-ALTER TABLE `posts`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `posts_ibfk_1` (`userId`);
-
---
--- Index pour la table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  `admin` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 --
--- AUTO_INCREMENT pour la table `comments`
+-- Contraintes pour les tables déchargées
 --
-ALTER TABLE `comments`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT pour la table `posts`
---
-ALTER TABLE `posts`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT pour la table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
 
 --
 -- Contraintes pour la table `comments`
 --
 ALTER TABLE `comments`
-  ADD CONSTRAINT `comments_ibfk_53` FOREIGN KEY (`postId`) REFERENCES `posts` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `comments_ibfk_54` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `comments_ibfk_783` FOREIGN KEY (`postId`) REFERENCES `posts` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `comments_ibfk_784` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `posts`

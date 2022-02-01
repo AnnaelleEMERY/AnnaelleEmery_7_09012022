@@ -2,9 +2,10 @@
 Cloner ce dépot Github
 
 **Base de données**
-Se connecter au serveur MySQL de votre choix. 
+Se connecter au serveur MySQL de votre choix par le panneau de commande MySQL avec la commande : mysql -u root -p (puis on tape le mot de passe de l'utilisateur root 
 
-*Expliquer comment se connecter au serveur MySQL de son choix.*
+Note : la premiere fois root n'a pas de mot de passe, si vous voulez le changer, tapez cette commande : SET PASSWORD FOR 'root'@'localhost' = PASSWORD('NouveauMotDePasse');)
+
 
 Exécutez la commande: 
 create database groupomania2; 
@@ -23,12 +24,12 @@ Il faut remplacer groupomania2.sql par le chemin du fichier dans votre machine.
 
 **Démarrage du backend**
 1. Ouvrir un terminal
-2. cd backend pour aller dans le dossier "backend"
-3. npm install pour installer les dépendances
-4. nodemon serve pour lancer le backend
+2. Ecrivez "cd backend" pour aller dans le dossier "backend"
+3. Ecrivez "npm install" pour installer les dépendances
+4. Ecrivez "nodemon serve" pour lancer le backend
 
 **Demarrage Frontend Vue js**
 1. Ouvrir un nouveau terminal
-2. cd frontend  Aller dans le dossier "frontend"
-3. npm install  pour installer les dépendances
-4. npm run serve pour lancer le frontend 
+2. Ecrivez "cd frontend"  Aller dans le dossier "frontend"
+3. Ecrivez "npm install"  pour installer les dépendances
+4. Ecrivez "npm run serve" pour lancer le frontend 
