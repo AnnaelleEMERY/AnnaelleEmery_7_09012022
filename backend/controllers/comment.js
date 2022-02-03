@@ -11,26 +11,6 @@ exports.deleteComment = (req, res, next) => {
 
 };
 
-
-exports.modifyComment = (req, res, next) => {
-    console.log("req.params.id")
-    console.log(req.params.id)
-    // nous utilisons l'ID que nous recevons comme paramètre pour accéder au post correspondant dans la base de données 
-    models.comments.findOne({
-        where: { id: req.params.id }
-    })
-        .then(comment => {
-            console.log("comment")
-            console.log(comment)
-            comment.comment = req.body.contentComment;
-            comment.save()
-                .then(() => res.status(200).json({ message: "commentaire modifié !!" }))
-                .catch(error => {
-                    res.status(400).json({ error })
-                })
-        })
-}
-
 exports.createComment = (req, res, next) => {
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
