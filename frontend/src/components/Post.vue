@@ -126,8 +126,11 @@
 
       <!-- Ecrire un commentaire -->
       <div class="form">
+        <label class="d-none" id="label-content-com" for="input-com">Votre commentaire</label>
         <input
+          aria-labelledby="label-content-com"
           class="form-control"
+          id="input-com"
           v-model="comment"
           placeholder="Ecrire un commentaire..."
         />
@@ -182,11 +185,11 @@ export default {
   },
 
   created() {
-    const userId = sessionStorage.getItem("user");
+    const userId = localStorage.getItem("user");
     axios
       .get("http://localhost:3000/api/users/" + userId, {
         headers: {
-          Authorization: "Bearer " + sessionStorage.token,
+          Authorization: "Bearer " + localStorage.token,
         },
       })
       .then((response) => (this.user = response.data))
@@ -195,7 +198,7 @@ export default {
     axios
       .get("http://localhost:3000/api/auth/comments/" + this.post.id, {
         headers: {
-          Authorization: "Bearer " + sessionStorage.token,
+          Authorization: "Bearer " + localStorage.token,
         },
       })
       .then((response) => {
@@ -248,7 +251,7 @@ export default {
             formData,
             {
               headers: {
-                Authorization: "Bearer " + sessionStorage.token,
+                Authorization: "Bearer " + localStorage.token,
               },
             }
           )
@@ -276,7 +279,7 @@ export default {
             { comment: this.comment, postId: post.id },
             {
               headers: {
-                Authorization: "Bearer " + sessionStorage.token,
+                Authorization: "Bearer " + localStorage.token,
               },
             }
           )
@@ -286,7 +289,7 @@ export default {
             axios
               .get("http://localhost:3000/api/auth/comments/" + this.post.id, {
                 headers: {
-                  Authorization: "Bearer " + sessionStorage.token,
+                  Authorization: "Bearer " + localStorage.token,
                 },
               })
               .then((response) => {
@@ -305,7 +308,7 @@ export default {
       axios
         .delete("http://localhost:3000/api/auth/comments/" + comment.id, {
           headers: {
-            Authorization: "Bearer " + sessionStorage.token,
+            Authorization: "Bearer " + localStorage.token,
           },
         })
         .then((response) => {
@@ -313,7 +316,7 @@ export default {
           axios
             .get("http://localhost:3000/api/auth/comments/" + this.post.id, {
               headers: {
-                Authorization: "Bearer " + sessionStorage.token,
+                Authorization: "Bearer " + localStorage.token,
               },
             })
             .then((response) => {

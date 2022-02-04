@@ -37,8 +37,8 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const Access = ["/"]
   const pagesVerif = !Access.includes(to.path)
-  const loggedIn = sessionStorage.getItem("userId")
-  const sessionToken = sessionStorage.getItem("token")
+  const loggedIn = localStorage.getItem("userId")
+  const sessionToken = localStorage.getItem("token")
   if (pagesVerif && !loggedIn && !sessionToken) {
       return next("/")
   }

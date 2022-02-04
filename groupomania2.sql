@@ -27,8 +27,8 @@ SET time_zone = "+00:00";
 -- Structure de la table `comments`
 --
 
-DROP TABLE IF EXISTS `comments`;
-CREATE TABLE IF NOT EXISTS `comments` (
+DROP TABLE IF EXISTS `groupomania2.comments`;
+CREATE TABLE IF NOT EXISTS `groupomania2.comments` (
   `id` int NOT NULL AUTO_INCREMENT,
   `comment` varchar(255) NOT NULL,
   `createdAt` datetime DEFAULT NULL,
@@ -47,8 +47,8 @@ CREATE TABLE IF NOT EXISTS `comments` (
 -- Structure de la table `posts`
 --
 
-DROP TABLE IF EXISTS `posts`;
-CREATE TABLE IF NOT EXISTS `posts` (
+DROP TABLE IF EXISTS `groupomania2.posts`;
+CREATE TABLE IF NOT EXISTS `groupomania2.posts` (
   `id` int NOT NULL AUTO_INCREMENT,
   `content` varchar(255) NOT NULL,
   `createdAt` datetime NOT NULL,
@@ -67,8 +67,8 @@ CREATE TABLE IF NOT EXISTS `posts` (
 -- Structure de la table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
+DROP TABLE IF EXISTS `groupomania2.users`;
+CREATE TABLE IF NOT EXISTS `groupomania2.users` (
   `id` int NOT NULL AUTO_INCREMENT,
   `firstName` varchar(255) NOT NULL,
   `lastName` varchar(255) NOT NULL,
@@ -88,15 +88,15 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 -- Contraintes pour la table `comments`
 --
-ALTER TABLE `comments`
-  ADD CONSTRAINT `comments_ibfk_783` FOREIGN KEY (`postId`) REFERENCES `posts` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `comments_ibfk_784` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `groupomania2.comments`
+  ADD CONSTRAINT `comments_ibfk_783` FOREIGN KEY (`postId`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `comments_ibfk_784` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `posts`
 --
-ALTER TABLE `posts`
-  ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `groupomania2.posts`
+  ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

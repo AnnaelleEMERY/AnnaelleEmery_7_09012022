@@ -32,14 +32,14 @@ export default {
       users: [],
       user: [],
       email: "",
-      isAdmin: window.sessionStorage,
+      isAdmin: window.localStorage,
     };
   },
   created() {
     axios
       .get("http://localhost:3000/api/users", {
         headers: {
-          Authorization: "Bearer " + sessionStorage.token,
+          Authorization: "Bearer " + localStorage.token,
         },
       })
       .then((response) => {
@@ -54,7 +54,7 @@ export default {
       axios
         .delete("http://localhost:3000/api/users/" + user.id, {
           headers: {
-            Authorization: "Bearer " + sessionStorage.token,
+            Authorization: "Bearer " + localStorage.token,
           },
         })
         .then((response) => {

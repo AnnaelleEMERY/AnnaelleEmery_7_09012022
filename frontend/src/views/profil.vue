@@ -60,12 +60,12 @@ export default {
     };
   },
   created() {
-    const userId = sessionStorage.getItem("user");
-    const admin = sessionStorage.getItem("admin");
+    const userId = localStorage.getItem("user");
+    const admin = localStorage.getItem("admin");
     axios
       .get("http://localhost:3000/api/users/" + userId + admin, {
         headers: {
-          Authorization: "Bearer " + sessionStorage.token,
+          Authorization: "Bearer " + localStorage.token,
         },
       })
       .then((response) => (this.user = response.data))
@@ -81,7 +81,7 @@ export default {
           },
           {
             headers: {
-              Authorization: "Bearer " + sessionStorage.token,
+              Authorization: "Bearer " + localStorage.token,
             },
           }
         )
@@ -93,14 +93,14 @@ export default {
     },
 
     deleteUser() {
-      const userId = sessionStorage.getItem("user");
+      const userId = localStorage.getItem("user");
       axios
         .delete("http://localhost:3000/api/users/" + userId, {
           headers: { Authorization: "Bearer " + localStorage.token },
         })
         .then((response) => console.log(response))
         .catch((err) => console.log(err));
-      sessionStorage.clear();
+      localStorage.clear();
       this.$router.push("/");
     },
   },

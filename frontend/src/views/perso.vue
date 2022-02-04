@@ -9,15 +9,17 @@
             <div class="panel panel-info">
               <div class="panel-body">
                 <div class="form-group green-border-focus">
-                  <label for="title">Sujet</label><br />
+                  <label id="label-title" for="title">Sujet</label><br />
                   <input
+                    aria-labelledby="label-title"
                     type="text"
                     v-model="title"
                     class="form-control"
                   /><br />
 
-                  <label for="postMsg">Exprimez-vous</label>
+                  <label id="label-content" for="postMsg">Exprimez-vous</label>
                   <textarea
+                    aria-labelledby="label-content"
                     v-model="content"
                     class="form-control"
                     id="postMgs"
@@ -26,7 +28,9 @@
 
                   <!-- IMAGE -->
                   <div>
+                    <label class="d-none" id="file-input" for="file-input">Choisissez une image</label>
                     <input
+                      aria-labelledby="file-input"
                       class="custom-file-input"
                       type="file"
                       accept="image/*"
@@ -89,11 +93,11 @@ export default {
   },
 
   created() {
-    const userId = sessionStorage.getItem("user");
+    const userId = localStorage.getItem("user");
     axios
       .get("http://localhost:3000/api/users/" + userId, {
         headers: {
-          Authorization: "Bearer " + sessionStorage.token,
+          Authorization: "Bearer " + localStorage.token,
         },
       })
       .then((response) => (this.user = response.data))
@@ -102,7 +106,7 @@ export default {
     axios
       .get("http://localhost:3000/api/auth/posts/" + userId, {
         headers: {
-          Authorization: "Bearer " + sessionStorage.token,
+          Authorization: "Bearer " + localStorage.token,
         },
       })
       .then((response) => {
@@ -124,7 +128,7 @@ export default {
         axios
           .post("http://localhost:3000/api/auth/posts/post", formData, {
             headers: {
-              Authorization: "Bearer " + sessionStorage.token,
+              Authorization: "Bearer " + localStorage.token,
             },
           })
           .then((response) => {
@@ -133,11 +137,11 @@ export default {
             this.content = "";
             this.title = "";
             this.file = "";
-            const userId = sessionStorage.getItem("user");
+            const userId = localStorage.getItem("user");
             axios
               .get("http://localhost:3000/api/auth/posts/" + userId, {
                 headers: {
-                  Authorization: "Bearer " + sessionStorage.token,
+                  Authorization: "Bearer " + localStorage.token,
                 },
               })
               .then((response) => {
@@ -155,7 +159,7 @@ export default {
         axios
           .post("http://localhost:3000/api/auth/posts/post", payload, {
             headers: {
-              Authorization: "Bearer " + sessionStorage.token,
+              Authorization: "Bearer " + localStorage.token,
             },
           })
           .then((response) => {
@@ -163,11 +167,11 @@ export default {
             this.$emit("added", response.data);
             this.content = "";
             this.title = "";
-            const userId = sessionStorage.getItem("user");
+            const userId = localStorage.getItem("user");
             axios
               .get("http://localhost:3000/api/auth/posts/" + userId, {
                 headers: {
-                  Authorization: "Bearer " + sessionStorage.token,
+                  Authorization: "Bearer " + localStorage.token,
                 },
               })
               .then((response) => {
@@ -190,7 +194,7 @@ export default {
       axios
         .delete("http://localhost:3000/api/auth/posts/" + item.id, {
           headers: {
-            Authorization: "Bearer " + sessionStorage.getItem("token"),
+            Authorization: "Bearer " + localStorage.getItem("token"),
           },
         })
         .then((response) => {

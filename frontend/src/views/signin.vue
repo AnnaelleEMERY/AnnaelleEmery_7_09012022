@@ -139,10 +139,10 @@ export default {
           .then((response) => {
             let responseUser = response.data.userId;
             let responseAdmin = response.data.admin;
-            sessionStorage.setItem("admin", JSON.stringify(responseAdmin));
+            localStorage.setItem("admin", JSON.stringify(responseAdmin));
             let responseToken = response.data.token;
-            sessionStorage.setItem("user", JSON.stringify(responseUser)); //push de l'id dans la sessionStorage
-            sessionStorage.setItem("token", responseToken);
+            localStorage.setItem("user", JSON.stringify(responseUser)); //push de l'id dans la localStorage
+            localStorage.setItem("token", responseToken);
             console.log(this.$router);
             this.$router.push("perso");
           })
@@ -171,11 +171,11 @@ export default {
           })
           .then((response) => {
             let responseAdmin = response.data.admin;
-            sessionStorage.setItem("admin", JSON.stringify(responseAdmin));
+            localStorage.setItem("admin", JSON.stringify(responseAdmin));
             let responseUser = response.data.userId;
             let responseToken = response.data.token;
-            sessionStorage.setItem("user", JSON.stringify(responseUser)); //push de l'id dans la sessionStorage
-            sessionStorage.setItem("token", responseToken);
+            localStorage.setItem("user", JSON.stringify(responseUser)); //push de l'id dans la localStorage
+            localStorage.setItem("token", responseToken);
             this.$router.push("perso");
           })
           .catch(() => {
