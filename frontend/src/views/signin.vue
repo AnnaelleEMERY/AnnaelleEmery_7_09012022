@@ -1,10 +1,10 @@
 <template>
-  <div class="container">
+  <div class="containerSignin">
     <div class="row justify-content-center">
       <div class="col-md-8 d-flex justify-content-center">
         <img
           src="../assets/icon-title.png"
-          class="w-40 img-fluide"
+          class="img-signin w-40 img-fluide"
           alt="titre"
         />
       </div>
@@ -31,8 +31,8 @@
             Se connecter</span
           >
         </p>
-        <div class="mgs">{{ message }}</div>
-        <div class="mgs">{{ emessage }}</div>
+        <div class="mgsSignin">{{ message }}</div>
+        <div class="mgsSignin">{{ emessage }}</div>
       </div>
 
       <div class="row-8 d-flex align-items-center flex-column">
@@ -193,78 +193,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-#app {
-  background-color: none !important  ;
-}
+@import '../css/signin.css';
 
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
-}
-
-h1 {
-  font-size: larger;
-  margin-top: 10px;
-  color: #d1515a;
-  font-weight: 900;
-}
-
-.form-floating {
-  width: 300px;
-}
-
-.btn {
-  margin-top: 10px;
-  font-family: 'Julius Sans One', sans-serif;
-}
-
-.btn_primary {
-  background-color: #D1515A;
-  color: white;
-}
-
-.btn_primary:hover {
-  background-color: #091F43;
-  color: white;
-}
-
-img {
-  width: 300px;
-  box-shadow: 0px 0px 15px 15px white;
-}
-
-.connect {
-  display: flex;
-  justify-content: center;
-}
-
-.card__subtitle {
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-fieldset {
-  margin-bottom: 100px;
-  display: FLEX;
-  flex-direction: COLUMN;
-  border-radius: 50px;
-  background-color: blanchedalmond;
-  box-shadow: 2px 3px 3px #d1515a;
-}
-
-.form-control {
-  margin-top: 10px;
-}
-
-.mgs {
-  display: flex;
-  justify-content: center;
-  color: red;
-}
 </style> 

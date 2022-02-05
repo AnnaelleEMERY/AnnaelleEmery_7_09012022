@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="mainPost">
     <div class="div-post">
       <div class="d-flex justify-content-between mt-2">
         <div class="d-flex flex-row">
@@ -7,7 +7,7 @@
             <h6 class="mb-0">
               {{ post.user.firstName }} {{ post.user.lastName }}
             </h6>
-            <span class="date"> {{ formatDate(post.createdAt) }} </span>
+            <span class="date-post"> {{ formatDate(post.createdAt) }} </span>
           </div>
         </div>
       </div>
@@ -41,7 +41,7 @@
           id="file-input"
           ref="fileInput"
         />
-        <div class="mgs">{{ messageEdited }}</div>
+        <div class="mgs-post">{{ messageEdited }}</div>
 
         <!-- Boutons 'annuler' et 'modifier' -->
         <div class="d-flex">
@@ -88,7 +88,7 @@
     </div>
     <!------------------------- COMMENTAIRES ------------------------->
 
-    <div class="card p-3 mt-3">
+    <div class="card-post p-3 mt-3">
       <h2 class="com_h2">Commentaires</h2>
       <div
         class="commentDiv d-flex flex-column mt-2"
@@ -101,7 +101,7 @@
             <h6 class="mb-0">
               {{ comment.user.firstName }} {{ comment.user.lastName }}
             </h6>
-            <span class="date">{{ formatDate(comment.createdAt) }}</span>
+            <span class="date-post">{{ formatDate(comment.createdAt) }}</span>
           </div>
         </div>
 
@@ -134,7 +134,7 @@
           v-model="comment"
           placeholder="Ecrire un commentaire..."
         />
-        <div class="mgs">{{ message }}</div>
+        <div class="mgs-post">{{ message }}</div>
 
         <div class="mt-2 d-flex justify-content-end">
           <button
@@ -332,93 +332,7 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-  font-family: "Comic Sans MS", cursive;
-  color: #d1515a;
-  font-weight: 900;
-}
 
-h2 {
-  font-size: smaller;
-}
+@import '../css/post.css';
 
-h6 {
-  font-weight: 600;
-}
-
-.com_h2 {
-  border-top: 1px solid #d1515a;
-  padding-top: 1rem;
-}
-
-.date {
-  font-size: 0.9rem;
-}
-
-.card {
-  border: none;
-}
-
-.div-post {
-  padding: 1rem;
-}
-
-.commentDiv {
-  padding: 1rem 0rem;
-  border-bottom: 1px solid #d1515a;
-  border-width: 50%;
-}
-
-.divImage img {
-  max-width: 100%;
-}
-
-.btn {
-  font-family: "Julius Sans One", sans-serif;
-}
-
-.btn_primary {
-  background-color: #091f43;
-  color: white;
-  font-family: "Julius Sans One", sans-serif;
-}
-
-.btn_primary:hover {
-  background-color: #d1515a;
-  color: white;
-}
-
-.form {
-  margin-top: 30px;
-}
-
-.btn-trash {
-  border: 1px solid #d1515a;
-  padding: 0.5rem;
-  height: fit-content;
-}
-
-.btn-trash:hover {
-  background-color: #d1515a;
-}
-
-.trash {
-  color: #d1515a;
-}
-
-.btn-trash:hover span {
-  color: #5e0404;
-}
-
-.titleCon {
-  margin-top: 20px;
-}
-
-.title {
-  font-weight: bolder;
-}
-
-.mgs {
-  color: #d1515a;
-}
 </style>

@@ -3,16 +3,7 @@
 </template>
 
 <style>
-html, body {
-  width: 100%;
-  height: 100%;
-}
 
-body {
-  background-color: #091f43;
-}
+@import './css/global.css';
 
-.container:last-child {
-  padding-bottom: 5rem;
-}
 </style>

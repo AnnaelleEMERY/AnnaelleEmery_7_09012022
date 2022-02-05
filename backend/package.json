@@ -32,6 +32,7 @@
     "sequelize": "^6.12.5"
   },
   "devDependencies": {
+    "compression-webpack-plugin": "^9.2.0",
     "sqlite3": "^5.0.2"
   }
 }

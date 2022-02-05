@@ -28,9 +28,9 @@
 
                   <!-- IMAGE -->
                   <div>
-                    <label class="d-none" id="file-input" for="file-input">Choisissez une image</label>
+                    <label class="d-none" id="file-input-label" for="file-input">Choisissez une image</label>
                     <input
-                      aria-labelledby="file-input"
+                      aria-labelledby="file-input-label"
                       class="custom-file-input"
                       type="file"
                       accept="image/*"
@@ -209,77 +209,7 @@ export default {
 
 
 <style scoped>
-body {
-  background-color: white;
-}
 
-.main {
-  padding-bottom: 2rem;
-  background-color: white;
-  margin-top: 2rem;
-  border-radius: 30px;
-}
+@import '../css/perso.css';
 
-.container {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-h1 {
-  font-family: "Julius Sans One", sans-serif;
-  color: #d1515a;
-  font-weight: 900;
-}
-
-.div-post-creation {
-  padding: 1.5rem;
-  border-radius: 30px;
-}
-
-.form {
-  margin-top: 30px;
-}
-
-.form-control {
-  border-radius: 20px;
-}
-
-.form-group {
-  margin-top: 30px;
-}
-
-label {
-  font-family: "Exo 2", sans-serif;
-  color: #091F43;
-  margin-bottom: 0.5rem;
-  font-size: 1.2rem;
-}
-
-.custom-file-input {
-  padding-top: 1rem;
-}
-
-.row {
-  margin-bottom: 50px;
-  margin-top: 50px;
-  background-color: rgb(216, 212, 206);
-}
-
-.btn-post-partager {
-  margin-top: 1.5rem;
-  font-family: "Julius Sans One", sans-serif;
-}
-
-.btn_primary {
-  background-color: #091f43;
-  color: white;
-}
-
-.btn_primary:hover {
-  background-color: #d1515a;
-  color: white;
-}
-
-.mgs {
-  color: #d1515a;
-}
 </style> 

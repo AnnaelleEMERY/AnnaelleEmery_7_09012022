@@ -1,0 +1,39 @@
+.card-profil {
+  background-color: #f19c9c;
+  width: 350px;
+  border-radius: 20px;
+}
+
+.btn-lightest {
+  padding: 0.5rem;
+  margin-top: 10px;
+  font-family: 'Julius Sans One', sans-serif;
+  border-radius: 15px !important;
+  color: #d1515a;
+  background-color: #faebd7;
+  border: 1px solid #faebd7;
+}
+
+.btn-lightest:hover {
+  color: #5e0404;
+  background-color: #faebd7;
+  border: 1px solid #faebd7;
+}
+
+.line-color {
+  color: rgb(224, 17, 17);
+  height: 3px;
+}
+
+.password p {
+  font-size: bolder;
+}
+
+input[type="email"] {
+  border: none;
+  border-bottom: 2px solid red;
+}
+
+.input-mail-profile {
+  width: 80%;
+}

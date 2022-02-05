@@ -73,29 +73,6 @@ export default {
 };
 </script>
 
-
-
 <style scoped>
-
-.container {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.main {
-  padding: 1rem;
-  background-color: white;
-  margin-top: 2rem;
-  border-radius: 30px;
-}
-
-h1 {
-  font-family: 'Julius Sans One', sans-serif;
-  color: #d1515a;
-  font-weight: 900;
-}
-
-.form {
-  margin-top: 30px;
-}
 
 </style>

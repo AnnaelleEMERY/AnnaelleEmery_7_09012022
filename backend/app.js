@@ -16,8 +16,6 @@ const limiter = rateLimit({
   max: 100 // 100 requests max pour 15min
 });
 
-app.use(compression());
-
 const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
 const commentRoutes = require('./routes/comment');
@@ -45,6 +43,6 @@ app.use(limiter);
 // Désactive la mise en cache du navigateur
 app.use(nocache());
 
-
+app.use(compression());
 
 module.exports = app;

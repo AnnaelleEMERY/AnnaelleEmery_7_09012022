@@ -3,7 +3,7 @@
     <navBar />
     <h1>Mon Profil</h1>
     <div class="container mt-5 d-flex justify-content-center">
-      <div class="card p-4 mt-3">
+      <div class="card-profil p-4 mt-3">
         <div class="first">
           <h6 class="heading">{{ user.firstName }} {{ user.lastName }}</h6>
           <div class="time d-flex flex-row align-items-center justify-content-between mt-3"></div>
@@ -19,10 +19,10 @@
         <div class="password">
           <p class="heading">Changer mon email</p>
           <label class="change" for="user-email">email:</label><br />
-          <input id="user-email" v-model="user.email" />
+          <input class="input-mail-profile" id="user-email" v-model="user.email" />
           <div class="third mt-4">
             <button
-              class="btn btn-success btn-block"
+              class="btn-lightest btn-success btn-block"
               @click.prevent="modifyProfil(user)"
             >
               Modifier
@@ -32,7 +32,7 @@
         <hr class="line-color" />
         <div class="third mt-4">
           <button
-            class="btn btn-success btn-block"
+            class="btn-lightest btn-success btn-block"
             @click.prevent="deleteUser()"
           >
             <i class="fas fa-trash"></i> Supprimer le compte
@@ -110,55 +110,6 @@ export default {
 
 <style scoped>
 
-#app {
-  font-family: Comic Sans MS, cursive;
-  background-color: #cccce2;
-}
+@import '../css/profil.css';
 
-h1 {
-  display: flex;
-  justify-content: center;
-  color: #d1515a;
-  font-family: 'Julius Sans One', sans-serif;
-  font-weight: 900;
-}
-
-.card {
-  background-color: #f19c9c;
-  width: 350px;
-  border-radius: 20px;
-}
-
-.heading {
-  font-weight: 700;
-}
-
-.btn {
-  border-radius: 15px !important;
-  color: #d1515a;
-  background-color: #faebd7;
-  border: 1px solid #faebd7;
-}
-
-.btn:hover {
-  color: #5e0404;
-}
-
-.line-color {
-  color: rgb(224, 17, 17);
-  height: 3px;
-}
-
-.password p {
-  font-size: bolder;
-}
-
-input[type="email"] {
-  border: none;
-  border-bottom: 2px solid red;
-}
-
-input {
-  width: 80%;
-}
 </style>

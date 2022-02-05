@@ -2,11 +2,11 @@
   <main>
     <navBar />
     <h1>Les membres de Groupomania</h1>
-    <div class="container mt-5 d-flex justify-content-center">
-      <div class="card p-4 m-3" v-for="user in users" v-bind:key="user.id">
+    <div class="container-members mt-5 d-flex justify-content-center">
+      <div class="card-members p-4 m-3" v-for="user in users" v-bind:key="user.id">
         <h6 class="heading">{{ user.firstName }} <br />{{ user.lastName }}</h6>
         <p>{{ user.email }}</p>
-        <button class="btn_delete"
+        <button class="btn_delete-members"
           v-if="isAdmin.admin === 'true'"
           @click.prevent="deleteOneUser(user)"
         >
@@ -77,55 +77,6 @@ export default {
 
 <style scoped>
 
-#app {
-  font-family: Comic Sans MS, cursive;
-  background-color: #cccce2;
-}
-
-.card {
-  background-color: #d0cde2;
-  width: 350px;
-  border-radius: 20px;
-  -webkit-transform: scale(1);
-  transform: scale(1);
-  -webkit-transition: 0.3s ease-in-out;
-  transition: 0.3s ease-in-out;
-}
-
-.card:hover {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
-}
-
-.container {
-  flex-wrap: wrap;
-}
-
-.heading {
-  font-weight: 700;
-}
-
-h1 {
-  display: flex;
-  justify-content: center;
-  color: #d1515a;
-  font-family: 'Julius Sans One', sans-serif;
-  margin-left: 10px;
-  font-weight: 900;
-}
-
-.btn_delete {
-  border: none;
-  border-radius: 15rem;
-  background-color: #d1515a;
-  color: #5e0404;
-  width: 80%;
-  align-self: center;
-}
-
-.btn_delete:hover {
-  background-color: #5e0404;
-  color: #d1515a;
-}
+@import '../css/members.css';
 
 </style>

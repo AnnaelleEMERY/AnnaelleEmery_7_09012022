@@ -43,66 +43,7 @@ export default {
 </script>
 
 <style scoped>
-.header {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap !important;
-  background-color: #091f43;
-  border-bottom: 4px solid #d1515a;
-  padding: 1.5rem 2rem !important;
-}
 
-.header-list {
-  display: flex;
-  flex-direction: row;
-}
-
-.header-list li {
-  margin-right: 1.5rem;
-}
-
-@media (max-width: 626px) {
-  .header {
-    flex-direction: column;
-  }
-
-  .header-list {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-}
-
-.navbar-brand img {
-  width: 10.3rem;
-  margin-left: 0em;
-  margin-right: 0.5rem;
-}
-
-.nav-item {
-  font-size: large;
-  font-weight: bolder;
-  cursor: pointer;
-  -webkit-transform: scale(1);
-  transform: scale(1);
-  -webkit-transition: 0.3s ease-in-out;
-  transition: 0.3s ease-in-out;
-}
-
-.nav-item:hover {
-  -webkit-transform: scale(1.2);
-  transform: scale(1.2);
-}
-
-.nav-link {
-  font-family: 'Open Sans', sans-serif;
-  color: white;
-}
-
-.navbar {
-  width: 100%;
-  margin-bottom: 40px;
-  padding: 0 1rem;
-}
+@import '../css/navBar.css';
 
 </style>

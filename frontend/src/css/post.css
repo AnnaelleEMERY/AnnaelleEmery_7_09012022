@@ -1,0 +1,51 @@
+.date-post {
+  font-size: 0.9rem;
+}
+
+.card-post {
+  border: none;
+}
+
+.div-post {
+  padding: 1rem;
+}
+
+.commentDiv {
+  padding: 1rem 0rem;
+  border-bottom: 1px solid #d1515a;
+  border-width: 50%;
+}
+
+.divImage img {
+  max-width: 100%;
+}
+
+.btn-trash {
+  border: 1px solid #d1515a;
+  padding: 0.5rem;
+  height: fit-content;
+}
+
+.btn-trash:hover {
+  background-color: #d1515a;
+}
+
+.trash {
+  color: #d1515a;
+}
+
+.btn-trash:hover span {
+  color: #5e0404;
+}
+
+.titleCon {
+  margin-top: 20px;
+}
+
+.title {
+  font-weight: bolder;
+}
+
+.mgs-post {
+  color: #d1515a;
+}

@@ -1,0 +1,60 @@
+#app {
+  background-color: none !important  ;
+}
+
+.containerSignin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+.card__title {
+  font-size: larger;
+  margin-top: 10px;
+  color: #d1515a;
+  font-weight: 900;
+}
+
+.form-floating {
+  width: 300px;
+}
+
+
+.img-signin {
+  width: 300px;
+  box-shadow: 0px 0px 15px 15px white;
+}
+
+.connect {
+  display: flex;
+  justify-content: center;
+}
+
+.card__subtitle {
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+fieldset {
+  margin-bottom: 100px;
+  display: FLEX;
+  flex-direction: COLUMN;
+  border-radius: 50px;
+  background-color: blanchedalmond;
+  box-shadow: 2px 3px 3px #d1515a;
+}
+
+.form-control {
+  margin-top: 10px;
+}
+
+.mgsSignin {
+  display: flex;
+  justify-content: center;
+  color: red;
+}
