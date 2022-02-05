@@ -4,9 +4,9 @@
       <div class="d-flex justify-content-between mt-2">
         <div class="d-flex flex-row">
           <div class="d-flex flex-column">
-            <h6 class="mb-0">
+            <h2 class="h3-post mb-0">
               {{ post.user.firstName }} {{ post.user.lastName }}
-            </h6>
+            </h2>
             <span class="date-post"> {{ formatDate(post.createdAt) }} </span>
           </div>
         </div>
@@ -126,11 +126,10 @@
 
       <!-- Ecrire un commentaire -->
       <div class="form">
-        <label class="d-none" id="label-content-com" for="input-com">Votre commentaire</label>
+        <label class="d-none" id="label-content-com" for="input-coms">Votre commentaire</label>
         <input
-          aria-labelledby="label-content-com"
           class="form-control"
-          id="input-com"
+          id="input-coms"
           v-model="comment"
           placeholder="Ecrire un commentaire..."
         />

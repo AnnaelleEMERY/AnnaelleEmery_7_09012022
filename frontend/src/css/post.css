@@ -6,6 +6,10 @@
   border: none;
 }
 
+.h3-post {
+  font-size: 1.2rem !important;
+}
+
 .div-post {
   padding: 1rem;
 }
