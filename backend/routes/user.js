@@ -5,10 +5,10 @@ const userCtrl = require('../controllers/user');
 
 router.post('/signup', userCtrl.signup);
 router.post('/login', userCtrl.login);
-router.get('/:id',userCtrl.getOneUser)
-router.get('/',userCtrl.getAllUsers)
-router.get('/:id/posts/comments',userCtrl.findPostCom);
-router.put('/:id',userCtrl.updateUser)
-router.delete('/:id',userCtrl.deleteUser)
+router.get('/:id', auth, userCtrl.getOneUser)
+router.get('/', auth, userCtrl.getAllUsers)
+router.get('/:id/posts/comments', auth, userCtrl.findPostCom);
+router.put('/:id', auth, userCtrl.updateUser)
+router.delete('/:id', auth, userCtrl.deleteUser)
 
 module.exports = router;

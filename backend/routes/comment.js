@@ -6,12 +6,12 @@ const commentCtrl=require('../controllers/comment');
 const auth = require('../middleware/auth');
 
 //requete pour poster un nouvel objet avec multer pour les images
-router.post('/',commentCtrl.createComment);
+router.post('/', auth, commentCtrl.createComment);
 
 //requete pour ciblé et afficher un element grace a son id
-router.get('/:postId',commentCtrl.getAllComments);
+router.get('/:postId', auth, commentCtrl.getAllComments);
 
 //requete pour supprimer un objet existant
-router.delete('/:id',commentCtrl.deleteComment );
+router.delete('/:id', auth, commentCtrl.deleteComment );
 
 module.exports = router; 

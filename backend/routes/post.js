@@ -7,19 +7,19 @@ const auth = require('../middleware/auth');
 const multer = require('../middleware/multer-config')
 
 //requete get pour afin de renvoyer les posts dans la base de donnee
-router.get('/',postCtrl.getAllPosts);
+router.get('/', auth, postCtrl.getAllPosts);
 
 //requete pour poster un nouvel objet avec multer pour les images
-router.post('/post',multer , postCtrl.createPost);
+router.post('/post', auth, multer , postCtrl.createPost);
 
 //requete pour ciblé et afficher un element grace a son id
-router.get('/:userId',postCtrl.findAllPostUser);
+router.get('/:userId', auth, postCtrl.findAllPostUser);
 
 //requete pour modifier un objet existant
-router.put('/:id', multer, postCtrl.modifyPost );
+router.put('/:id', auth, multer, postCtrl.modifyPost );
 
 //requete pour supprimer un objet existant
-router.delete('/:id',postCtrl.deletePost );
+router.delete('/:id', auth, postCtrl.deletePost );
 
 
 module.exports = router;

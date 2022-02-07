@@ -9,7 +9,6 @@ require("dotenv").config();
 const helmet = require('helmet')
 const auth = require('./middleware/auth')
 const nocache = require('nocache');
-const compression = require('compression');
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -42,7 +41,5 @@ app.use(limiter);
 
 // Désactive la mise en cache du navigateur
 app.use(nocache());
-
-app.use(compression());
 
 module.exports = app;
