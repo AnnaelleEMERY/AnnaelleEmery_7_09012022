@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 01 fév. 2022 à 18:43
+-- Généré le : mer. 09 fév. 2022 à 20:08
 -- Version du serveur :  8.0.27
 -- Version de PHP : 7.3.21
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `groupomania2`
 --
+CREATE DATABASE IF NOT EXISTS `groupomania2` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+USE `groupomania2`;
 
 -- --------------------------------------------------------
 
@@ -27,8 +29,8 @@ SET time_zone = "+00:00";
 -- Structure de la table `comments`
 --
 
-DROP TABLE IF EXISTS `groupomania2.comments`;
-CREATE TABLE IF NOT EXISTS `groupomania2.comments` (
+DROP TABLE IF EXISTS `comments`;
+CREATE TABLE IF NOT EXISTS `comments` (
   `id` int NOT NULL AUTO_INCREMENT,
   `comment` varchar(255) NOT NULL,
   `createdAt` datetime DEFAULT NULL,
@@ -38,8 +40,7 @@ CREATE TABLE IF NOT EXISTS `groupomania2.comments` (
   PRIMARY KEY (`id`),
   KEY `comments_ibfk_247` (`postId`),
   KEY `comments_ibfk_248` (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=131 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
+) ENGINE=InnoDB AUTO_INCREMENT=139 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -47,8 +48,8 @@ CREATE TABLE IF NOT EXISTS `groupomania2.comments` (
 -- Structure de la table `posts`
 --
 
-DROP TABLE IF EXISTS `groupomania2.posts`;
-CREATE TABLE IF NOT EXISTS `groupomania2.posts` (
+DROP TABLE IF EXISTS `posts`;
+CREATE TABLE IF NOT EXISTS `posts` (
   `id` int NOT NULL AUTO_INCREMENT,
   `content` varchar(255) NOT NULL,
   `createdAt` datetime NOT NULL,
@@ -58,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `groupomania2.posts` (
   `image` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `posts_ibfk_1` (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=337 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=354 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 -- --------------------------------------------------------
@@ -67,8 +68,8 @@ CREATE TABLE IF NOT EXISTS `groupomania2.posts` (
 -- Structure de la table `users`
 --
 
-DROP TABLE IF EXISTS `groupomania2.users`;
-CREATE TABLE IF NOT EXISTS `groupomania2.users` (
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
   `id` int NOT NULL AUTO_INCREMENT,
   `firstName` varchar(255) NOT NULL,
   `lastName` varchar(255) NOT NULL,
@@ -77,25 +78,22 @@ CREATE TABLE IF NOT EXISTS `groupomania2.users` (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   `admin` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email_unique` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-
---
--- Contraintes pour les tables déchargées
---
 
 --
 -- Contraintes pour la table `comments`
 --
-ALTER TABLE `groupomania2.comments`
-  ADD CONSTRAINT `comments_ibfk_783` FOREIGN KEY (`postId`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `comments_ibfk_784` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `comments`
+  ADD CONSTRAINT `comments_ibfk_879` FOREIGN KEY (`postId`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `comments_ibfk_880` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `posts`
 --
-ALTER TABLE `groupomania2.posts`
+ALTER TABLE `posts`
   ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
