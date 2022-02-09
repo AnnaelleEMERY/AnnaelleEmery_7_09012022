@@ -11,7 +11,11 @@ module.exports = (sequelize, Sequelize) => sequelize.define("user", {
   },
   email: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      isEmail: { args: true, msg: "Veuillez entrer une adresse mail valide" }
+    },
+    unique: {args: true, msg: "Cet email existe déjà"}
   },
   password: {
     type: DataTypes.STRING,

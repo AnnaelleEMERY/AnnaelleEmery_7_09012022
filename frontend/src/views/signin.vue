@@ -180,8 +180,7 @@ export default {
           })
           .catch(() => {
             {
-              this.emessage = `"Votre mot de passe doit contenir min 7 caractères"
-                              "1 maj et 1 chiffre"`;
+              this.emessage = `"Vérifiez votre email. Votre mot de passe doit bien contenir min 7 caractères 1 maj et 1 chiffre"`;
             }
           });
       }
